@@ -3,7 +3,7 @@ module.exports  = {
     test01:()=>{
         return 'hello world';
     },
-    text02:()=>{
+    test02:()=>{
         console.log('TEST', ' create zero number ');
         
         let number = require('../../module/type/index');
@@ -15,11 +15,11 @@ module.exports  = {
             fv: number._getFaceValueAt(-3),
         };
     },
-    text03:()=>{
+    test03:()=>{
         console.log('TEST', ' create positive number ');
         
         let number = require('../../module/type/index');
-        number = number.getNumber('123123123123123123.456789', null)
+        number = number.getNumber('123123123123123123.456789')
         return {
             v: number._getValue(),
             lv: number._getInt(),
@@ -27,11 +27,19 @@ module.exports  = {
             f: number._getFlags()
         };
     },
-    text04:()=>{
+    test04:()=>{
         console.log('TEST', ' create negative number ');
         
         let number = require('../../module/type/index');
-        number = number.getNumber(-123, null)
+        number = number.getNumber(-123)
         return number;
+    },
+    test05:()=>{
+        console.log('TEST', ' replacing face value at a position in a number ');
+        
+        let number = require('../../module/type/index');
+        number = number.getNumber(-123)
+        number._setFaceValueAt(1, 5)
+        return number._getValue();
     }
 }

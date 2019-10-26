@@ -87,4 +87,45 @@ module.exports = class BXCNumber {
             return this._rightPart[position];
         }
     }
+
+    _setFaceValueAt(position, value){
+        if(typeof value == typeof '' && value.length == 1){
+            value = converter.getBaseFromTextChar(value);
+        }else if (typeof value == typeof 0){
+            value = converter.getBaseFromValue(value);
+        }
+        if(position>=0){
+            // look in left part
+            if(position<this._leftLength){
+                this._leftPart[this._leftLength-position-1] = value;
+                let b = '';
+                for (let index = 0; index < this._leftPart.length; index++) {
+                    const num = this._leftPart[index];
+                    b = b + num.text;
+                }
+                this._leftValue = b;
+            }
+        }else{
+            // look in right part
+            position = -position-1;
+            if(this._flags._float==eFlags.SET && position<this._rightLength){
+                this._rightPart[position] = value;
+                let b = '';
+                for (let index = 0; index < this._rightPart.length; index++) {
+                    const num = this._rightPart[index];
+                    b = num.text + b;
+                }
+                this._rightValue = b;
+            }
+        }
+        this._value = '';
+        if(this._flags._sign==eFlags.SET){
+            this._value = '-'
+        }
+        this._value = this._value + this._leftValue;
+        if(this._flags._float==eFlags.SET){
+            this._value = '.'
+            this._value = this._value + this._rightValue;
+        }
+    }
 }
