@@ -122,7 +122,7 @@ module.exports = class BXCNumber {
         b = '';
         for (let index = 0; index < this._rightPart.length; index++) {
             const num = this._rightPart[index];
-            b = num.text + b;
+            b = b + num.text;
         }
         this._rightValue = b;
 
@@ -172,8 +172,8 @@ module.exports = class BXCNumber {
                 const c = v2.substr(index, grouping);
                 val = val + ':' + c;
             }
-            value = val ;
         }
+        value = val;
         while(value.includes(':')){
             value = value.replace(':', ',');
         }
@@ -195,15 +195,15 @@ module.exports = class BXCNumber {
         }
 
         length = this._rightLength;
-        index = 0;
+        index = -length;
         // check if there is a rightpart
         if(this._flags._float == eFlags.SET && length>0){
             // yes, there is a rightpart
             // trim rightpart
-            while(this._getFaceValueAt(index) == 0){
+            while(this._getFaceValueAt(index).value == 0){
                 index++;
             }
-            this._rightPart = this._rightPart.splice(index, index+1);
+            this._rightPart = this._rightPart.splice(0, -index);
         }
 
         this._refresh();
