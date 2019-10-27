@@ -12,5 +12,28 @@ module.exports = {
         }else{
             throw Error('Not supported yet');
         }
+    },
+    getZeros:(base,left,right)=>{
+        let v = '';
+        if(left){
+            while(left>0){
+                v+=eBase.ZERO.text;
+                left--;
+            }
+        }else{
+            v = '0'
+        }
+        if(right){
+            if(right>0){
+                v+='.';
+            }
+            while(right>0){
+                v+=eBase.ZERO.text;
+                right--;
+            }
+        }else{
+            v+='0';
+        }
+        return new BXCNumber(v, base);
     }
 }

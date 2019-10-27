@@ -181,7 +181,7 @@ module.exports = class BXCNumber {
     }
 
     _trimZero(){
-        let length = this._leftLength - 1;
+        let length = this._leftPart.length - 1;
         let index = 0;
 
         // check if there is leftpart
@@ -194,7 +194,7 @@ module.exports = class BXCNumber {
             this._leftPart = this._leftPart.splice(index, this._leftLength-index);
         }
 
-        length = this._rightLength;
+        length = this._rightPart.length;
         index = -length;
         // check if there is a rightpart
         if(this._flags._float == eFlags.SET && length>0){
