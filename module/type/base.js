@@ -33,7 +33,7 @@ module.exports = Base =  {
             value:7
         },
         EIGHT:{
-            text:8,
+            text:'8',
             value:8
         },
         NINE:{
