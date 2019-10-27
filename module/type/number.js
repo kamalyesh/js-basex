@@ -38,7 +38,7 @@ module.exports = class BXCNumber {
         this._length = flags._sign==eFlags.SET?this._value.length-1:this._value.length;
         this._length = flags._flags==eFlags.SET?this._length-1:this._length;
         this._leftLength = this._leftValue.length;
-        this._rightLength = flags._flags==eFlags.SET?this._rightValue.length:0;
+        this._rightLength = flags._float==eFlags.SET?this._rightValue.length:0;
 
         this._leftPart = [];
         {
@@ -98,34 +98,72 @@ module.exports = class BXCNumber {
             // look in left part
             if(position<this._leftLength){
                 this._leftPart[this._leftLength-position-1] = value;
-                let b = '';
-                for (let index = 0; index < this._leftPart.length; index++) {
-                    const num = this._leftPart[index];
-                    b = b + num.text;
-                }
-                this._leftValue = b;
             }
         }else{
             // look in right part
             position = -position-1;
             if(this._flags._float==eFlags.SET && position<this._rightLength){
                 this._rightPart[position] = value;
-                let b = '';
-                for (let index = 0; index < this._rightPart.length; index++) {
-                    const num = this._rightPart[index];
-                    b = num.text + b;
-                }
-                this._rightValue = b;
             }
         }
+        this._refresh();
+    }
+
+    _refresh(){
+        // convert array leftpart to string leftvalue
+        let b = '';
+        for (let index = 0; index < this._leftPart.length; index++) {
+            const num = this._leftPart[index];
+            b = b + num.text;
+        }
+        this._leftValue = b;
+
+        // convert array rightpart to string rightvalue
+        b = '';
+        for (let index = 0; index < this._rightPart.length; index++) {
+            const num = this._rightPart[index];
+            b = num.text + b;
+        }
+        this._rightValue = b;
+
+        // reset value
         this._value = '';
         if(this._flags._sign==eFlags.SET){
             this._value = '-'
         }
         this._value = this._value + this._leftValue;
         if(this._flags._float==eFlags.SET){
-            this._value = '.'
+            this._value = this._value+ '.';
             this._value = this._value + this._rightValue;
         }
+    }
+
+    _trimZero(){
+        let length = this._leftLength - 1;
+        let index = 0;
+
+        // check if there is leftpart
+        if(length>=0){
+            // yes, there is a leftpart
+            // trim leftPart
+            while(this._getFaceValueAt(length - index).value == 0){
+                index++;
+            }
+            this._leftPart = this._leftPart.splice(index, this._leftLength-index);
+        }
+
+        length = this._rightLength;
+        index = 0;
+        // check if there is a rightpart
+        if(this._flags._float == eFlags.SET && length>0){
+            // yes, there is a rightpart
+            // trim rightpart
+            while(this._getFaceValueAt(index) == 0){
+                index++;
+            }
+            this._rightPart = this._rightPart.splice(index, index+1);
+        }
+
+        this._refresh();
     }
 }

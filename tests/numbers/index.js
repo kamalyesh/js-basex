@@ -41,5 +41,18 @@ module.exports  = {
         number = number.getNumber(-123)
         number._setFaceValueAt(1, 5)
         return number._getValue();
+    },
+    test06:()=>{
+        console.log('TEST', ' PI ');
+        let number = require('../../module/type/index');
+        number = number.getPI();
+        return number;
+    },
+    test07:()=>{
+        console.log('TEST', ' trimming excess zero from number ');
+        let number = require('../../module/type/index');
+        number = number.getNumber('000110.100');
+        number._trimZero();
+        return number;
     }
 }
