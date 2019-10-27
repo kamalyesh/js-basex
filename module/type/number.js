@@ -138,6 +138,48 @@ module.exports = class BXCNumber {
         }
     }
 
+    _getFormattedValue(grouping){
+        // get the number as a formatted string,
+        // grouped by desired number of digits (default 3)
+        //  and separated by comma.
+
+        if(grouping==null || grouping == undefined || grouping <=0){
+            grouping = 3;
+        }
+        this._trimZero();
+        let value = '';
+        if(this._flags._sign==eFlags.SET){
+            value = '-'
+        }
+        let val  = this._leftValue;
+        let v2 = '';
+        val = val.split('');
+        val = val.reverse();
+        val = val.join('');
+        v2 = v2 + val.substr(0, grouping);
+        for (let index = grouping; index < val.length; index+=grouping) {
+            const c = val.substr(index, grouping);
+            v2 = v2 + ':' + c;
+        }
+        v2 = v2.split('');
+        v2 = v2.reverse();
+        val = v2.join('');
+        if(this._flags._float==eFlags.SET){
+            val += '.';
+            v2 = this._rightValue;
+            val = val+v2.substr(0, grouping);
+            for (let index = grouping; index < v2.length; index+=grouping) {
+                const c = v2.substr(index, grouping);
+                val = val + ':' + c;
+            }
+            value = val ;
+        }
+        while(value.includes(':')){
+            value = value.replace(':', ',');
+        }
+        return value;
+    }
+
     _trimZero(){
         let length = this._leftLength - 1;
         let index = 0;

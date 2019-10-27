@@ -54,5 +54,11 @@ module.exports  = {
         number = number.getNumber('000110.100');
         number._trimZero();
         return number;
+    },
+    test08:()=>{
+        console.log('TEST', ' printing formatted number, grouped by \',\' ');
+        let number = require('../../module/type/index');
+        number = number.getNumber('1203456000110.100');
+        return number._getFormattedValue(3);
     }
 }
