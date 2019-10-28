@@ -5,6 +5,14 @@ module.exports = {
         let arith = require('./arithmetic');
         return arith.sum(numbers);
     },
+    addition:(num1, num2)=>{
+        let arith = require('./arithmetic');
+        return arith.addition(num1, num2);
+    },
+    subtraction:(num1, num2)=>{
+        let arith = require('./arithmetic');
+        return arith.subtraction(num1, num2);
+    },
     min:(numbers)=>{
         let compare = require('./comparison');
         return compare.min(numbers);

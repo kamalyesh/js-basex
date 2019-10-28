@@ -39,4 +39,13 @@ module.exports  = {
         
         return arr[ops.min(arr)];
     },
+    test06:()=>{
+        console.log('TEST', ' simple unsigned subtraction (two numbers)');
+        let number = require('../../module/type/index');
+        const ops = require('../../module/operations');
+        let n1 = number.getNumber('13.1234567890');
+        let n2 = number.getNumber('92.2345678901');
+        let sum = ops.subtraction(n1, n2);
+        return sum;
+    },
 }
