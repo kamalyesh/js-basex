@@ -12,7 +12,7 @@ module.exports  = {
             v: number._getValue(),
             lv: number._getInt(),
             f: number._getFlags(),
-            fv: number._getFaceValueAt(-3),
+            fv: number._getFaceValueAt(0),
         };
     },
     test03:()=>{

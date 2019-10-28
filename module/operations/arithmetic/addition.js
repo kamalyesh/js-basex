@@ -3,7 +3,7 @@ let number = require('../../type');
 const ops = require('../../operations');
 
 module.exports = {
-    uAdd :(num1, num2)=>{
+    unsignedAddition :(num1, num2)=>{
         let result = number.getNumber();
         let leftPart1 = num1._leftPart;
         let leftPart2 = num2._leftPart;
@@ -68,10 +68,10 @@ module.exports = {
         }
         zero._setFaceValueAt(leftLength, carry);
         zero._trimZero();
-        console.log('num1:', num1._getValue());
-        console.log('num2:', num2._getValue());
-        console.log('sum :',zero._getValue());
-        console.log('carry: ', carry);
+        // console.log('num1:', num1._getValue());
+        // console.log('num2:', num2._getValue());
+        // console.log('sum :',zero._getValue());
+        // console.log('carry: ', carry);
         return zero;
     }
 }

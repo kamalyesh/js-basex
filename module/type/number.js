@@ -17,22 +17,7 @@ module.exports = class BXCNumber {
         // convert number, if it is, to string
         this._value = this._value + '';
         // get left part and right part of number, splitted by .
-        let splits = this._value.split('.');
-        splits[0] ? this._leftValue = splits[0]+'' : this._leftValue = '0';
-        splits[1] ? this._rightValue = splits[1]+'' : this._rightValue = '0';
-        // set sign flags
-        let flags = {};
-        if (this._value.startsWith('-')) {
-            flags._sign = eFlags.SET;
-            this._leftValue = this._leftValue.substr(1);
-        }else flags._sign = eFlags.RESET;
-        // set zero flag
-        if (this._value == 0 || (this._leftValue==0 && this._rightValue==0)) flags._zero = eFlags.SET;
-        else flags._zero = eFlags.RESET;
-        // set float flag
-        splits[1]?flags._float = eFlags.SET: flags._float=eFlags.RESET;
-        // set flags
-        this._flags = flags;
+        let flags = this._refreshFlags();
 
         // set lengths
         this._length = flags._sign==eFlags.SET?this._value.length-1:this._value.length;
@@ -136,6 +121,28 @@ module.exports = class BXCNumber {
             this._value = this._value+ '.';
             this._value = this._value + this._rightValue;
         }
+
+        this._refreshFlags();
+    }
+
+    _refreshFlags(){
+        let splits = this._value.split('.');
+        splits[0] ? this._leftValue = splits[0]+'' : this._leftValue = '0';
+        splits[1] ? this._rightValue = splits[1]+'' : this._rightValue = '0';
+        // set sign flags
+        let flags = {};
+        if (this._value.startsWith('-')) {
+            flags._sign = eFlags.SET;
+            this._leftValue = this._leftValue.substr(1);
+        }else flags._sign = eFlags.RESET;
+        // set zero flag
+        if (this._value == 0 || (this._leftValue==0 && this._rightValue==0)) flags._zero = eFlags.SET;
+        else flags._zero = eFlags.RESET;
+        // set float flag
+        splits[1]?flags._float = eFlags.SET: flags._float=eFlags.RESET;
+        // set flags
+        this._flags = flags;
+        return flags;
     }
 
     _getFormattedValue(grouping){

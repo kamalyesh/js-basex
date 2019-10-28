@@ -26,4 +26,17 @@ module.exports  = {
         let sum = ops.sum([]);
         return sum;
     },
+    test05:()=>{
+        console.log('TEST', ' minimum of two numbers ');
+        let number = require('../../module/type/index');
+        const ops = require('../../module/operations');
+        
+        let n1 = number.getNumber('3.2345678901');
+        let n2 = number.getNumber('-13.1234567890');
+
+        let arr = [n1, n2];
+        console.log('minimum of (',n2._getValue(),',',n1._getValue(),'):', arr[ops.min(arr)]._getValue());
+        
+        return arr[ops.min(arr)];
+    },
 }
