@@ -43,8 +43,29 @@ module.exports  = {
         console.log('TEST', ' simple unsigned subtraction (two numbers)');
         let number = require('../../module/type/index');
         const ops = require('../../module/operations');
-        let n1 = number.getNumber('13.1234567890');
+        let n1 = number.getNumber('10.1234567890');
+        let n2 = number.getNumber('20.2345678901');
+        let sum = ops.subtraction(n2, n1);
+        return sum;
+    },
+    test07:()=>{
+        console.log('TEST', ' zero - number');
+        let number = require('../../module/type/index');
+        const ops = require('../../module/operations');
+
+        let n1 = number.getZeros(null, 1, 1);
+        console.log('zero: ', n1);
         let n2 = number.getNumber('92.2345678901');
+        let sum = ops.subtraction(n1, n2);
+        return sum;
+    },
+    test08:()=>{
+        console.log('TEST', 'result zero ');
+        let number = require('../../module/type/index');
+        const ops = require('../../module/operations');
+
+        let n1 = number.getNumber('10.1');
+        let n2 = number.getNumber('10.1');
         let sum = ops.subtraction(n1, n2);
         return sum;
     },

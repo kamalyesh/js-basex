@@ -13,8 +13,8 @@ module.exports = {
         let arith = require('./arithmetic');
         return arith.subtraction(num1, num2);
     },
-    min:(numbers)=>{
+    min:(numbers, signed)=>{
         let compare = require('./comparison');
-        return compare.min(numbers);
+        return compare.min(numbers, signed);
     }
 }

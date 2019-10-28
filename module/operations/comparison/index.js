@@ -2,8 +2,9 @@ let BXCNumber = require('../../type/number');
 const {eBase} = require('../../type/base');
 
 module.exports = {
-    min:(numbers)=>{
+    min:(numbers, signed)=>{
         let compare = require('./minimum');
-        return compare.signedMin(numbers);
+        if(signed)  return compare.signedMin(numbers);
+        else        return compare.unsignedMin(numbers);
     }
 }

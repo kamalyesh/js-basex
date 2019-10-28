@@ -1,5 +1,6 @@
 let number = require('../../type/');
 const {eBase} = require('../../type/base');
+const {eFlags} = require('../../type/flags');
 module.exports = {
     addition:(num1, num2)=>{
         let addition = require('./addition');
@@ -9,15 +10,21 @@ module.exports = {
         let subtraction = require('./subtraction');
         let arr = [num1, num2];
         let ops = require('../../operations');
-        let min = ops.min(arr);
+        let min = ops.min(arr, true);
         if(min == 0){
             // num2 - num1
+            let sign = num2._flags._sign;
             let r = subtraction.unsignedSubtraction(num2, num1);
-            r = number.getNumber('-'+r._getValue(), r._base);
+            let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+            r = number.getNumber(numString, r._base);
             return r;
         }else if (min == 1){
             // num1 - num2
-            return subtraction.unsignedSubtraction(num1, num2);
+            let sign = num1._flags._sign;
+            let r = subtraction.unsignedSubtraction(num1, num2);
+            let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+            r = number.getNumber(numString, r._base);
+            return r;
         }else{
             // exception
             console.log('something went wrong');

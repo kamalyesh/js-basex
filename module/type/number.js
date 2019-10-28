@@ -195,7 +195,7 @@ module.exports = class BXCNumber {
         if(length>=0){
             // yes, there is a leftpart
             // trim leftPart
-            while(this._getFaceValueAt(length - index).value == 0){
+            while(this._getFaceValueAt(length - index).value == 0 && length-index>0){
                 index++;
             }
             this._leftPart = this._leftPart.splice(index, this._leftLength-index);
@@ -207,7 +207,7 @@ module.exports = class BXCNumber {
         if(this._flags._float == eFlags.SET && length>0){
             // yes, there is a rightpart
             // trim rightpart
-            while(this._getFaceValueAt(index).value == 0){
+            while(this._getFaceValueAt(index).value == 0 && index<-1){
                 index++;
             }
             this._rightPart = this._rightPart.splice(0, -index);
