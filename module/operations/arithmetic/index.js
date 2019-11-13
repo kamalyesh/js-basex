@@ -16,7 +16,7 @@ module.exports = {
     subtraction:(num1, num2)=>{
         let arr = [num1, num2];
         let ops = require('../../operations');
-        let min = ops.min(arr, true);
+        let min = ops.min(arr, false);
         // check for signs here
         if(num1._flags._sign == num2._flags._sign){
             // both signs same, perform subtraction
@@ -27,27 +27,32 @@ module.exports = {
                 // num2 - num1
                 sign = num2._flags._sign;
                 r = subtraction.unsignedSubtraction(num2, num1);
-                let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+                // let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+                let numString = sign==eFlags.SET ?'-'+r._getValue():r._getValue();
                 r = number.getNumber(numString, r._base);
                 return r;
             }else if (min == 1){
                 // num1 - num2
                 sign = num1._flags._sign;
                 r = subtraction.unsignedSubtraction(num1, num2);
-                let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+                // let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+                let numString = sign==eFlags.SET?'-'+r._getValue():r._getValue();
                 r = number.getNumber(numString, r._base);
                 return r;
             }else{
                 // exception
                 console.log('something went wrong');
             }
-        }else{
-            // both signs different, perform addition, if num2 is -ve,
-            if(min==0 && num1._flags._sign==eFlags.RESET){
-                r = subtraction.unsignedSubtraction(num2, num1);
-                let numString = '-'+r._getValue();
-                r = number.getNumber(numString, r._base);
-            }else if (min==1 && num1._flags._sign==eFlags.SET){}
+        }else {
+            // num1 is -ve
+            let addition = require('./addition');
+            r = addition.unsignedAddition(num1, num2);
+            let numString = r._getValue();
+            if(num1._flags._sign==eFlags.SET){
+                numString = '-'+numString;
+            }
+            r = number.getNumber(numString, r._base);
+            return r;
         }
         
     },

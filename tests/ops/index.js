@@ -98,4 +98,13 @@ module.exports  = {
         
         return ops.areEqual(arr, true);
     },
+    test11:()=>{
+        console.log('TEST', ' simple signed subtraction (two numbers)');
+        let number = require('../../module/type/index');
+        const ops = require('../../module/operations');
+        let n2 = number.getNumber('-10.1234567890');
+        let n1 = number.getNumber('-20.2345678901');
+        let sum = ops.subtraction(n1, n2);
+        return sum;
+    },
 }

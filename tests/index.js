@@ -25,5 +25,6 @@ module.exports = {
         // console.log('test08 ', test.test08());
         // console.log('test09 ', test.test09());
         // console.log('test10 ', test.test10());
+        console.log('test11 ', test.test11());
     }
 }
