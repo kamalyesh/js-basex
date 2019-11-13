@@ -113,7 +113,7 @@ module.exports  = {
         const ops = require('../../module/operations/arithmetic/multiplication');
         const {eBase} = require('../../module/type/base');
         let Ten = eBase.FIVE;
-        for(let num = 1; num<=Ten.value; ++num){
+        for(let num = 1; num<Ten.value; ++num){
             let table = Number.getNumber(num+'', Ten);
             table = ops.prepareMultiplicationTable(table);
             for (let index2 = 0; index2 < table.length; index2++) {
