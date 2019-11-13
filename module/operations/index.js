@@ -20,5 +20,9 @@ module.exports = {
     max:(numbers, signed)=>{
         let compare = require('./comparison');
         return compare.max(numbers, signed);
+    },
+    areEqual:(numbers, signed)=>{
+        let compare = require('./comparison');
+        return compare.areEqual(numbers, signed);
     }
 }

@@ -9,7 +9,12 @@ module.exports = {
     },
     max:(numbers, signed)=>{
         let compare = require('./maximum');
-        if(signed)  return compare.signedMin(numbers);
+        if(signed)  return compare.signedMax(numbers);
         else        return compare.unsignedMax(numbers);
     },
+    areEqual:(numbers, signed)=>{
+        let compare = require('./equate');
+        if(signed)  return compare.signedEquate(numbers);
+        else        return compare.unsignedEquate(numbers);
+    }
 }

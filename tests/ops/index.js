@@ -74,12 +74,28 @@ module.exports  = {
         let number = require('../../module/type/index');
         const ops = require('../../module/operations');
         
-        let n1 = number.getNumber('3.2345678901');
+        let n1 = number.getNumber('-3.2345678901');
         let n2 = number.getNumber('13.1234567890');
 
         let arr = [n1, n2];
         console.log('maximum of (',n2._getValue(),',',n1._getValue(),'):', arr[ops.max(arr)]._getValue());
         
-        return arr[ops.max(arr)];
+        return arr[ops.max(arr, true)];
+    },
+    test10:()=>{
+        console.log('TEST', ' equivalence of two numbers ');
+        let number = require('../../module/type/index');
+        const ops = require('../../module/operations');
+        
+        let n1 = number.getNumber('3.2345678901');
+        let n2 = number.getNumber('13.1234567890');
+        // let n2 = number.getNumber('3.2345678901');
+
+        let arr = [n1, n2];
+        console.log('Are ',n2._getValue(),' & ',n1._getValue(),' equal?');
+        let result = ops.areEqual(arr);
+        console.log(result?'Yes':'No');
+        
+        return ops.areEqual(arr, true);
     },
 }
