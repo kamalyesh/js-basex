@@ -16,5 +16,9 @@ module.exports = {
     min:(numbers, signed)=>{
         let compare = require('./comparison');
         return compare.min(numbers, signed);
+    },
+    max:(numbers, signed)=>{
+        let compare = require('./comparison');
+        return compare.max(numbers, signed);
     }
 }

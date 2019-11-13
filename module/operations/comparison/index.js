@@ -6,5 +6,10 @@ module.exports = {
         let compare = require('./minimum');
         if(signed)  return compare.signedMin(numbers);
         else        return compare.unsignedMin(numbers);
-    }
+    },
+    max:(numbers, signed)=>{
+        let compare = require('./maximum');
+        if(signed)  return compare.signedMin(numbers);
+        else        return compare.unsignedMax(numbers);
+    },
 }
