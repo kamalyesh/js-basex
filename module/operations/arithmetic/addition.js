@@ -1,10 +1,10 @@
 const {eBase, converter } = require('../../type/base');
-let number = require('../../type');
+let Number = require('../../type');
 const ops = require('../../operations');
 
 module.exports = {
     unsignedAddition :(num1, num2)=>{
-        let result = number.getNumber();
+        let result = Number.getNumber();
         let leftPart1 = num1._leftPart;
         let leftPart2 = num2._leftPart;
         let rightPart1;
@@ -12,16 +12,16 @@ module.exports = {
         if(num1._flags._float){
             // get right part of num1
             rightPart1 = num1._rightPart;
-        }
+        }else{rightPart1 = []}
         if(num2._flags._float){
             //  get right part of num2
             rightPart2 = num2._rightPart;
-        }
+        }else{rightPart2 = []}
 
         let leftLength = leftPart1.length>leftPart2.length?leftPart1.length:leftPart2.length;
         let rightLength = rightPart1.length>rightPart2.length?rightPart1.length:rightPart2.length;
         // create a zero
-        let zero = number.getZeros(num1._base, leftLength+1, rightLength);
+        let zero = Number.getZeros(num1._base, leftLength+1, rightLength);
         let base = num1._base;
         let carry = eBase.ZERO;
         for (let index = rightLength-1; index >= 0; index--) {
@@ -45,7 +45,9 @@ module.exports = {
             s = converter.getBaseFromValue(s);
             zero._setFaceValueAt(-index-1, s);
         }
-        for (let index = leftLength-1; index >= 0; index--) {
+        leftPart1 = leftPart1.reverse();
+        leftPart2 = leftPart2.reverse();
+        for (let index = 0; index < leftLength; index++) {
             // sum of left side. do this second using earlier carry
 
             // get values for single digit addition
@@ -64,8 +66,10 @@ module.exports = {
             }
             // put new single digit sum into the addition zero
             s = converter.getBaseFromValue(s);
-            zero._setFaceValueAt(leftLength - index - 1, s);
+            zero._setFaceValueAt(index, s);
         }
+        leftPart1 = leftPart1.reverse();
+        leftPart2 = leftPart2.reverse();
         zero._setFaceValueAt(leftLength, carry);
         zero._trimZero();
         // console.log('num1:', num1._getValue());

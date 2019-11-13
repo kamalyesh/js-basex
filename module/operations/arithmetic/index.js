@@ -81,8 +81,8 @@ module.exports = {
         }else if(numbers.length==1){
             sum = numbers[0]
         }else{
-            let number = require('../../type');
-            sum = number.getZeros(null, 0, 0);
+            let Number = require('../../type');
+            sum = Number.getZeros(null, 0, 0);
         }
         return sum;
     },

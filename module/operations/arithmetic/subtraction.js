@@ -1,11 +1,11 @@
 const {eBase, converter } = require('../../type/base');
-let number = require('../../type');
+let Number = require('../../type');
 const ops = require('../../operations');
 
 module.exports = {
     unsignedSubtraction :(num1, num2)=>{
         // assume num1 is greater than num2
-        let result = number.getNumber();
+        let result = Number.getNumber();
         let leftPart1 = num1._leftPart;
         let leftPart2 = num2._leftPart;
         let rightPart1;
@@ -22,7 +22,7 @@ module.exports = {
         let leftLength = leftPart1.length>leftPart2.length?leftPart1.length:leftPart2.length;
         let rightLength = rightPart1.length>rightPart2.length?rightPart1.length:rightPart2.length;
         // create a zero
-        let zero = number.getZeros(num1._base, leftLength+1, rightLength);
+        let zero = Number.getZeros(num1._base, leftLength+1, rightLength);
         let base = num1._base;
         let borrow = eBase.ZERO;
         for (let index = rightLength-1; index >= 0; index--) {
