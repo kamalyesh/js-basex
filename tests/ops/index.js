@@ -112,7 +112,7 @@ module.exports  = {
         let Number = require('../../module/type/index');
         const ops = require('../../module/operations/arithmetic/multiplication');
         const {eBase} = require('../../module/type/base');
-        let Ten = eBase.FIVE;
+        let Ten = eBase.A;
         for(let num = 1; num<Ten.value; ++num){
             let table = Number.getNumber(num+'', Ten);
             table = ops.prepareMultiplicationTable(table);
@@ -122,6 +122,19 @@ module.exports  = {
             }
             console.log('..');
         }
+        return {status:'success'};
+    },
+    test13:()=>{
+        console.log('TEST', ' multiplication of two numbers, in base 10');
+        let Number = require('../../module/type/index');
+        const ops = require('../../module/operations/arithmetic/multiplication');
+        const {eBase} = require('../../module/type/base');
+        let Ten = eBase.FIVE;
+        
+        let n2 = Number.getNumber('10');
+        let n1 = Number.getNumber('-20');
+
+        ops.multiplication(n1, n2)
         return {status:'success'};
     },
 }

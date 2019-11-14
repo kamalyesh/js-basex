@@ -10,7 +10,7 @@ module.exports = {
             return addition.unsignedAddition(num1, num2);
         }else{
             // both signs different, perform subtraction,
-            sum = module.exports.subtraction(num1 , num2);
+            return module.exports.subtraction(num1 , num2);
         }
     },
     subtraction:(num1, num2)=>{
@@ -46,7 +46,7 @@ module.exports = {
         }else {
             // num1 is -ve
             let addition = require('./addition');
-            r = addition.unsignedAddition(num1, num2);
+            let r = addition.unsignedAddition(num1, num2);
             let numString = r._getValue();
             if(num1._flags._sign==eFlags.SET){
                 numString = '-'+numString;
