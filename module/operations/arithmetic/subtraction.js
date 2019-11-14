@@ -1,68 +1,68 @@
-const {eBase, converter } = require('../../type/base');
+const { eBase, converter } = require('../../type/base');
 let Number = require('../../type');
 const ops = require('../../operations');
 
 module.exports = {
-    unsignedSubtraction :(num1, num2)=>{
+    unsignedSubtraction: (num1, num2) => {
         // assume num1 is greater than num2
         let result = Number.getNumber();
         let leftPart1 = num1._leftPart;
         let leftPart2 = num2._leftPart;
         let rightPart1;
         let rightPart2;
-        if(num1._flags._float){
+        if (num1._flags._float) {
             // get right part of num1
             rightPart1 = num1._rightPart;
         }
-        if(num2._flags._float){
+        if (num2._flags._float) {
             //  get right part of num2
             rightPart2 = num2._rightPart;
         }
 
-        let leftLength = leftPart1.length>leftPart2.length?leftPart1.length:leftPart2.length;
-        let rightLength = rightPart1.length>rightPart2.length?rightPart1.length:rightPart2.length;
+        let leftLength = leftPart1.length > leftPart2.length ? leftPart1.length : leftPart2.length;
+        let rightLength = rightPart1.length > rightPart2.length ? rightPart1.length : rightPart2.length;
         // create a zero
-        let zero = Number.getZeros(num1._base, leftLength+1, rightLength);
+        let zero = Number.getZeros(num1._base, leftLength + 1, rightLength);
         let base = num1._base;
         let borrow = eBase.ZERO;
-        for (let index = rightLength-1; index >= 0; index--) {
+        for (let index = rightLength - 1; index >= 0; index--) {
             // sum of right side. do this first and get a borrow
 
             // get values for single digit subtraction
-            let a = rightPart1[index]?rightPart1[index]:eBase.ZERO;
-            let b = rightPart2[index]?rightPart2[index]:eBase.ZERO;
+            let a = rightPart1[index] ? rightPart1[index] : eBase.ZERO;
+            let b = rightPart2[index] ? rightPart2[index] : eBase.ZERO;
             // make subtraction
             let s = b.value + borrow.value;
-            if(s > a.value){
+            if (s > a.value) {
                 // if first number is smaller than second number and borrow, make adjustments
                 s = a.value + base.value;
                 s = s - b.value - borrow.value;
                 // borrow is one
                 borrow = eBase.ONE;
-            }else{
+            } else {
                 // borrow is zero
                 s = a.value - b.value - borrow.value;
                 borrow = eBase.ZERO;
             }
             // put new single digit sum into the subtraction zero
             s = converter.getBaseFromValue(s);
-            zero._setFaceValueAt(-index-1, s);
+            zero._setFaceValueAt(-index - 1, s);
         }
-        for (let index = leftLength-1; index >= 0; index--) {
+        for (let index = leftLength - 1; index >= 0; index--) {
             // sum of left side. do this second using earlier borrow
 
             // get values for single digit subtraction
-            let a = leftPart1[index]?leftPart1[index]:eBase.ZERO;
-            let b = leftPart2[index]?leftPart2[index]:eBase.ZERO;
+            let a = leftPart1[index] ? leftPart1[index] : eBase.ZERO;
+            let b = leftPart2[index] ? leftPart2[index] : eBase.ZERO;
             // make subtraction
             let s = b.value + borrow.value;
-            if(s > a.value){
+            if (s > a.value) {
                 // if first number is smaller than second number and borrow, make adjustments
                 s = a.value + base.value;
                 s = s - b.value - borrow.value;
                 // borrow is one
                 borrow = eBase.ONE;
-            }else{
+            } else {
                 // borrow is zero
                 s = a.value - b.value - borrow.value;
                 borrow = eBase.ZERO;
@@ -78,5 +78,45 @@ module.exports = {
         // console.log('sum :',zero._getValue());
         // console.log('borrow: ', borrow);
         return zero;
+    },
+    subtraction: (num1, num2) => {
+        let arr = [num1, num2];
+        let min = ops.min(arr, false);
+        // check for signs here
+        if (num1._flags._sign == num2._flags._sign) {
+            // both signs same, perform subtraction
+            let subtraction = require('./subtraction');
+            let sign;
+            let r;
+            if (min == 0) {
+                // num2 - num1
+                sign = num2._flags._sign;
+                r = subtraction.unsignedSubtraction(num2, num1);
+                // let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+                let numString = sign == eFlags.SET ? '-' + r._getValue() : r._getValue();
+                r = number.getNumber(numString, r._base);
+                return r;
+            } else if (min == 1) {
+                // num1 - num2
+                sign = num1._flags._sign;
+                r = subtraction.unsignedSubtraction(num1, num2);
+                // let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
+                let numString = sign == eFlags.SET ? '-' + r._getValue() : r._getValue();
+                r = number.getNumber(numString, r._base);
+                return r;
+            } else {
+                // exception
+                console.log('something went wrong');
+            }
+        } else {
+            // num1 is -ve
+            let r = ops.unsignedAddition(num1, num2);
+            let numString = r._getValue();
+            if (num1._flags._sign == eFlags.SET) {
+                numString = '-' + numString;
+            }
+            r = number.getNumber(numString, r._base);
+            return r;
+        }
     }
 }

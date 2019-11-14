@@ -1,10 +1,8 @@
 const {eBase, converter } = require('../../type/base');
-let Number = require('../../type');
-const ops = require('../../operations');
+const Number = require('../../type');
 
 module.exports = {
     unsignedAddition :(num1, num2)=>{
-        let result = Number.getNumber();
         let leftPart1 = num1._leftPart;
         let leftPart2 = num2._leftPart;
         let rightPart1;
@@ -72,10 +70,16 @@ module.exports = {
         leftPart2 = leftPart2.reverse();
         zero._setFaceValueAt(leftLength, carry);
         zero._trimZero();
-        // console.log('num1:', num1._getValue());
-        // console.log('num2:', num2._getValue());
-        // console.log('sum :',zero._getValue());
-        // console.log('carry: ', carry);
         return zero;
+    },
+    addition:(num1, num2)=>{
+        // check for signs here
+        if (num1._flags._sign == num2._flags._sign) {
+            // both signs same, perform addition
+            return ops.unsignedAddition(num1, num2);
+        } else {
+            // both signs different, perform subtraction,
+            return ops.subtraction(num1, num2);
+        }
     }
 }

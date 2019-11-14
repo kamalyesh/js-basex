@@ -1,44 +1,33 @@
-let number = require('../../type/');
-const {eBase} = require('../../type/base');
-
 module.exports = {
-    unsignedEquate:(numbers)=>{
-        // returns true if numbers are equal
+    unsignedEquate: (num1, num2) => {
+        // returns true if two numbers are equal
         // does not considers sign of numbers
-        if(numbers.length>1){
-            for (let index = 0; index < numbers.length-1; index++) {
-                // get values
-                let number = numbers[index]._value +'';
-                let nextNumber = numbers[index+1]._value +'';
 
-                // check for signs of both
-                if((number.startsWith('-') && !nextNumber.startsWith('-')) || (!number.startsWith('-') && nextNumber.startsWith('-'))){
-                    if(number.startsWith('-'))number = number.substr(1);
-                    if(nextNumber.startsWith('-'))nextNumber = nextNumber.substr(1);
-                }
+        if (typeof num1 != 'string') { num1 = num1._value };
+        if (typeof num2 != 'string') { num2 = num2._value };
 
-                // test equivalence
-                if(number !== nextNumber){
-                    return false;
-                }
-            }
+        // check for signs of both
+        if ((num1.startsWith('-') && !num2.startsWith('-')) || (!number.startsWith('-') && num2.startsWith('-'))) {
+            if (num.startsWith('-')) num = num.substr(1);
+            if (num2.startsWith('-')) num2 = num2.substr(1);
+        }
+
+        // test equivalence
+        if (num !== num2) {
+            return false;
         }
         return true;
     },
-    signedEquate:(numbers)=>{
+    signedEquate: (num1, num2) => {
         // returns true if numbers are equal
         // considers signs in comparison
-        if(numbers.length>1){
-            for (let index = 0; index < numbers.length-1; index++) {
-                // get values
-                let number = numbers[index]._value +'';
-                let nextNumber = numbers[index+1]._value +'';
 
-                // test equivalence
-                if(number !== nextNumber){
-                    return false;
-                }
-            }
+        if (typeof num1 != 'string') { num1 = num1._value };
+        if (typeof num2 != 'string') { num2 = num2._value };
+
+        // test equivalence
+        if (num1 !== num2) {
+            return false;
         }
         return true;
     }

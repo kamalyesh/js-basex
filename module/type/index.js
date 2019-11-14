@@ -35,5 +35,22 @@ module.exports = {
             v+='0';
         }
         return new BXCNumber(v, base);
+    },
+    getNumberWithoutDotOrDash:(number)=>{
+        // returns string of the number without - sign and without . point
+        if(typeof number != 'string'){
+            number = number._value;
+        }
+        if(number.startsWith('-')){
+            number = number.substr(1);
+        }
+        if(number.includes('.')){
+            number = number.split('.');
+            number = number[0] + '' + 
+                number.length==2?
+                    number[1]:
+                    '';
+        }
+        return number;
     }
 }

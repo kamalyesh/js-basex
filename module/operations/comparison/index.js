@@ -1,20 +1,44 @@
-let BXCNumber = require('../../type/number');
-const {eBase} = require('../../type/base');
 
 module.exports = {
-    min:(numbers, signed)=>{
-        let compare = require('./minimum');
-        if(signed)  return compare.signedMin(numbers);
-        else        return compare.unsignedMin(numbers);
+    unsignedEquate: (num1, num2) => {
+        const compare = require('./equate');
+        return compare.unsignedEquate(numbers);
     },
-    max:(numbers, signed)=>{
-        let compare = require('./maximum');
-        if(signed)  return compare.signedMax(numbers);
-        else        return compare.unsignedMax(numbers);
+    signedEquate:(num1, num2)=>{
+        const compare = require('./equate');
+        return compare.signedEquate(numbers);
     },
-    areEqual:(numbers, signed)=>{
-        let compare = require('./equate');
-        if(signed)  return compare.signedEquate(numbers);
-        else        return compare.unsignedEquate(numbers);
-    }
+    areEqual: (num1, num2, signed) => {
+        const compare = require('./equate');
+        if (signed) return compare.signedEquate(num1, num2);
+        else return compare.unsignedEquate(num1, num2);
+    },
+
+    unsignedMax: (num1, num2) => {
+        const compare = require('./maximum');
+        return compare.unsignedMax(num1, num2);
+    },
+    signedMax: (num1, num2) => {
+        const compare = require('./maximum');
+        return compare.signedMax(num1, num2);
+    },
+    max: (num1, num2, signed) => {
+        const compare = require('./maximum');
+        if (signed) return compare.signedMax(num1, num2);
+        else return compare.unsignedMax(num1, num2);
+    },
+
+    unsignedMin: (num1, num2) => {
+        const compare = require('./minimum');
+        return compare.unsignedMin(num1, num2);
+    },
+    signedMin: (num1, num2) => {
+        const compare = require('./minimum');
+        return compare.signedMin(num1, num2);
+    },
+    min: (num1, num2, signed) => {
+        const compare = require('./minimum');
+        if (signed) return compare.signedMin(num1, num2);
+        else return compare.unsignedMin(num1, num2);
+    },
 }
