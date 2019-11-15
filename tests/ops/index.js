@@ -118,9 +118,9 @@ module.exports = {
             table = ops.prepareMultiplicationTable(table);
             for (let index2 = 0; index2 < table.length; index2++) {
                 const element = table[index2];
-                // console.log(element._value);
+                console.log(element._value);
             }
-            // console.log('..');
+            console.log('..');
         }
         return { status: true };
     },
@@ -131,10 +131,13 @@ module.exports = {
         const { eBase } = require('../../module/type/base');
         let Ten = eBase.FIVE;
 
-        let n2 = Number.getNumber('5.5');
-        let n1 = Number.getNumber('4');
+        let n2 = Number.getNumber('0.11');
+        let n1 = Number.getNumber('0.11');
 
-        ops.multiplication(n1, n2)
+        let result = ops.multiplication(n2, n1);
+        result._trimZero();
+        console.log(`multiplication ${n1._value}*${n2._value} = ${result._value}`);
+        
         return { status: true };
     },
 }

@@ -22,23 +22,36 @@ module.exports = {
         let multiplier = Number.getNumberWithoutDotOrDash(num2._value);
 
         let shiftDecimals = num1._rightLength + num2._rightLength;
-        let n1 = Number.getNumber(
-            Number.getNumberWithoutDotOrDash(num1._value),
-            num1._base
-        );
-        let n2 = Number.getNumber(
-            Number.getNumberWithoutDotOrDash(num2._value),
-            num2._base
-        );
+        // let n1 = Number.getNumber(
+        //     Number.getNumberWithoutDotOrDash(num1._value),
+        //     num1._base
+        // );
+        let n1 = num1;
+        let n2 = num2;
+        while(n1._value.includes('.') && n2._value.includes('.')){
+            n1 = ops.leftShift(n1);
+            n2 = ops.leftShift(n2);
+        }
+        while(n1._value.includes('.')){
+            n1 = ops.leftShift(n1);
+            shiftDecimals++;
+        }
+        // let n2 = Number.getNumber(
+        //     Number.getNumberWithoutDotOrDash(num2._value),
+        //     num2._base
+        // );
+        while(n2._value.includes('.')){
+            n2 = ops.leftShift(n2);
+            shiftDecimals++;
+        }
         
         let sign = n1._flags._sign == n2._flags._sign ? eFlags.RESET : eFlags.SET;
-        let sum = Number.getZeros(n1._leftLength + n2._leftLength, n1._rightLength + n2._rightLength)
+        let sum = Number.getZeros(num1._leftLength + num2._leftLength, num1._rightLength + num2._rightLength)
         let multiplicationTable = module.exports.prepareMultiplicationTable(n1);
         for (let index = 0; index < multiplier.length; index++) {
 
             let currentMultiplier = multiplier[index];
             currentMultiplier = converter.getBaseFromTextChar(currentMultiplier).value;
-            sum = ops.leftShift(sum);
             sum = ops.addition(sum, multiplicationTable[currentMultiplier]);
 
             if (index == multiplier.length - 1) {
@@ -48,6 +61,7 @@ module.exports = {
                 sum = ops.rightShift(sum, shiftDecimals);
                 return sum;
             }
+            sum = ops.leftShift(sum);
         }
     },    
 }

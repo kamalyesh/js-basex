@@ -15,7 +15,7 @@ module.exports = {
         return leftShift(number, shiftCount);
     },
     rightShift: (number, shiftCount) => {
-        const {leftShift} = require('./rightShift');
+        const {rightShift} = require('./rightShift');
         return rightShift(number, shiftCount);
     },
 
