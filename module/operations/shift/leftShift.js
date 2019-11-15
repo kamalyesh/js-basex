@@ -16,12 +16,16 @@ module.exports = {
                 for (let index = 1; index < splits.length; index++) {
                     const split = splits[index];
                     value += split;
+                    if(index == splits.length-1){
+                        return module.exports.leftShift(Number.getNumber(value, number._base), shiftCount-1);
+                    }
                 }
-                return module.exports.leftShift(Number.getNumber(value, number._base), shiftCount-1);
             } else {
                 value += '0';
                 return module.exports.leftShift(Number.getNumber(value, number._base), shiftCount-1);
             }
+        }else if (!shiftCount){
+            return module.exports.leftShift(number, 1);
         }
     }
 }

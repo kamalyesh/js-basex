@@ -1,5 +1,6 @@
-let number = require('../../type/');
+let Number = require('../../type/');
 const { eBase } = require('../../type/base');
+const {eFlags} = require('../../type/flags');
 
 module.exports = {
     unsignedMin: (num1, num2) => {
@@ -24,7 +25,7 @@ module.exports = {
                 }
             }
             // check 2.2 :: compare right parts from left most to right most place
-            let length = num1._rightLength > num2._rightLength ? num2._rightLength : num1._rightLength;
+            length = num1._rightLength > num2._rightLength ? num2._rightLength : num1._rightLength;
             for (let index2 = 0; index2 < length; index2++) {
                 const e1 = num1._getFaceValueAt(-index2 - 1) ? num1._getFaceValueAt(-index2 - 1) : eBase.ZERO;
                 const e2 = num2._getFaceValueAt(-index2 - 1) ? num2._getFaceValueAt(-index2 - 1) : eBase.ZERO;
@@ -34,6 +35,8 @@ module.exports = {
                     return num1;
                 }
             }
+        }else{
+            return num1;
         }
     },
     signedMin: (num1, num2) => {
@@ -43,7 +46,7 @@ module.exports = {
         // check 0 :: compare signs
 
         // if similar sign && sign is RESET (+ve), smaller value is maximum
-        if (maxValue._flags._sign == number._flags._sign == eFlags.RESET) {
+        if (num1._flags._sign == num2._flags._sign == eFlags.RESET) {
             return module.exports.unsignedMin(num1, num2);
         }
         // if similar sign && sign is SET (-ve), greater value is maximum

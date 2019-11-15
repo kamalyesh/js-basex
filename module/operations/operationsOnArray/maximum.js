@@ -3,19 +3,18 @@ const { eBase } = require('../../type/base');
 const ops = require('../../operations');
 
 module.exports = {
-    unsignedMax: (numbers) => {
+    unsignedMaximum: (numbers) => {
         // returns maximum number's index from the array
         // does not considers sign of numbers
         let maxIndex = 0;
         let maxValue;
         if (numbers.length > 1) {
-            tempMax = maxIndex;
             maxValue = numbers[maxIndex];
 
             for (let index = 1; index < numbers.length; index++) {
                 const number = numbers[index];
-                let max = ops.signedMax(maxValue, numbers)
-                if (ops.signedEquate(max, numbers)) {
+                let max = ops.signedMax(maxValue, number)
+                if (ops.signedEquate(max, number)) {
                     maxIndex = index;
                     maxValue = numbers[maxIndex];
                 }
@@ -23,9 +22,11 @@ module.exports = {
         }
         return maxIndex;
     },
-    signedMax: (numbers) => {
+    signedMaximum: (numbers) => {
         // returns maximum number's index from the array
         // considers signs in comparison
+        let maxIndex = 0;
+        let tempMax = 0;
         let maxValue;
         const OP_LESS_THAN = 1;
         const OP_GREATER_THAN = 1;

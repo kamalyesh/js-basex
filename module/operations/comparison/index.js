@@ -2,11 +2,11 @@
 module.exports = {
     unsignedEquate: (num1, num2) => {
         const compare = require('./equate');
-        return compare.unsignedEquate(numbers);
+        return compare.unsignedEquate(num1, num2);
     },
-    signedEquate:(num1, num2)=>{
+    signedEquate: (num1, num2) => {
         const compare = require('./equate');
-        return compare.signedEquate(numbers);
+        return compare.signedEquate(num1, num2);
     },
     areEqual: (num1, num2, signed) => {
         const compare = require('./equate');

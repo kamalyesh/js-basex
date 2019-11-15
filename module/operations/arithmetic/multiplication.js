@@ -19,10 +19,7 @@ module.exports = {
     },
     multiplication: (num1, num2) => {
         // multiplcation of two numbers num1 and num2
-        let multiplier = num2._value + '';
-        if (multiplier.startsWith('-')) {
-            multiplier = multiplier.substr(1);
-        }
+        let multiplier = Number.getNumberWithoutDotOrDash(num2._value);
 
         let shiftDecimals = num1._rightLength + num2._rightLength;
         let n1 = Number.getNumber(
@@ -33,7 +30,7 @@ module.exports = {
             Number.getNumberWithoutDotOrDash(num2._value),
             num2._base
         );
-        multiplier = multiplier.split()[0] + '' + (multiplier.split().length > 1 ? multiplier.split()[1] : '');
+        
         let sign = n1._flags._sign == n2._flags._sign ? eFlags.RESET : eFlags.SET;
         let sum = Number.getZeros(n1._leftLength + n2._leftLength, n1._rightLength + n2._rightLength)
         let multiplicationTable = module.exports.prepareMultiplicationTable(n1);

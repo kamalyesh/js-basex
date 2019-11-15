@@ -1,5 +1,6 @@
 const {eBase, converter } = require('../../type/base');
 const Number = require('../../type');
+const ops = require('../../operations');
 
 module.exports = {
     unsignedAddition :(num1, num2)=>{

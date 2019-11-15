@@ -7,13 +7,13 @@ module.exports = {
         if (typeof num2 != 'string') { num2 = num2._value };
 
         // check for signs of both
-        if ((num1.startsWith('-') && !num2.startsWith('-')) || (!number.startsWith('-') && num2.startsWith('-'))) {
+        if ((num1.startsWith('-') && !num2.startsWith('-')) || (!num1.startsWith('-') && num2.startsWith('-'))) {
             if (num.startsWith('-')) num = num.substr(1);
             if (num2.startsWith('-')) num2 = num2.substr(1);
         }
 
         // test equivalence
-        if (num !== num2) {
+        if (num1 !== num2) {
             return false;
         }
         return true;

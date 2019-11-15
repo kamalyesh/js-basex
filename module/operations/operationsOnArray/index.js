@@ -18,14 +18,42 @@ module.exports = {
     },
     equate: (numbers, signed) => {
         const comparison = require('./equate');
-        if(signed){
+        if (signed) {
             return comparison.signedEquate(numbers);
-        }else{
+        } else {
             return comparison.unsignedEquate(numbers);
         }
     },
-    unsignedMax: (numbers) => {
+    unsignedMaximum: (numbers) => {
         const comparison = require('./maximum');
-        return comparison.unsignedEquate(numbers);
+        return comparison.unsignedMaximum(numbers);
+    },
+    signedMaximum: (numbers) => {
+        const comparison = require('./maximum');
+        return comparison.signedMaximum(numbers);
+    },
+    maximum: (numbers, signed) => {
+        const comparison = require('./maximum');
+        if (signed) {
+            return comparison.signedMaximum(numbers);
+        } else {
+            return comparison.unsignedMaximum(numbers);
+        }
+    },
+    unsignedMinimmum: (numbers) => {
+        const comparison = require('./minimum');
+        return comparison.unsignedMinimum(numbers);
+    },
+    signedMinimum: (numbers) => {
+        const comparison = require('./minimum');
+        return comparison.signedMinimum(numbers);
+    },
+    minimum: (numbers, signed) => {
+        const comparison = require('./minimum');
+        if (signed) {
+            return comparison.signedMinimum(numbers);
+        } else {
+            return comparison.unsignedMinimum(numbers);
+        }
     }
 }

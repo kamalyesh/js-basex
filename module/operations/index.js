@@ -17,17 +17,17 @@ module.exports = {
         return arith.unsignedSubtraction(num1, num2);
     },
 
-    unsignedEquate: (numbers) => {
+    unsignedEquate: (num1, num2) => {
         const comparison = require('./comparison');
-        return comparison.unsignedEquate(numbers);
+        return comparison.unsignedEquate(num1, num2);
     },
-    signedEquate:(numbers)=>{
+    signedEquate: (num1, num2) => {
         const comparison = require('./comparison');
-        return comparison.signedEquate(numbers);
+        return comparison.signedEquate(num1, num2);
     },
-    areEqual: (numbers, signed) => {
+    equate: (num1, num2, signed) => {
         const comparison = require('./comparison');
-        return comparison.areEqual(numbers, signed);
+        return comparison.areEqual(num1, num2, signed);
     },
     unsignedMax: (num1, num2) => {
         const comparison = require('./comparison');
@@ -60,6 +60,42 @@ module.exports = {
     sum: (numbers) => {
         const arith = require('./operationsOnArray');
         return arith.sum(numbers);
+    },
+    unsignedMaximum: (numbers) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.unsignedMaximum(numbers);
+    },
+    signedMaximum: (numbers) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.signedMaximum(numbers);
+    },
+    maximum: (numbers, signed) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.maximum(numbers, signed);
+    },
+    unsignedMinimum: (numbers) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.unsignedMinimum(numbers);
+    },
+    signedMinimum: (numbers) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.signedMinimum(numbers);
+    },
+    minimum: (numbers, signed) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.minimum(numbers, signed);
+    },
+    unsignedAreEqual: (numbers) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.unsignedEquate(numbers);
+    },
+    signedAreEqual: (numbers) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.signedEquate(numbers);
+    },
+    areEqual: (numbers, signed) => {
+        const comparison = require('./operationsOnArray');
+        return comparison.equate(numbers, signed);
     },
     // min: (numbers, signed) => {
     //     const compare = require('./comparison');
