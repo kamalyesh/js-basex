@@ -1,12 +1,15 @@
 let Number = require('../../type/');
 const { eBase } = require('../../type/base');
 const {eFlags} = require('../../type/flags');
+const ops = require('../../operations');
 
 module.exports = {
     unsignedMin: (num1, num2) => {
         // returns minimum of two numbers
         // does not considers sign of numbers
-
+        if(ops.equate(num1, num2)){
+            return num1;
+        }
         // check 1 :: compare left lengths
         if (num1._leftLength > num2._leftLength) {
             return num2;
@@ -42,9 +45,11 @@ module.exports = {
     signedMin: (num1, num2) => {
         // returns maximum of two numbers
         // considers signs in comparison
-
+        
+        if(ops.equate(num1, num2)){
+            return num1;
+        }
         // check 0 :: compare signs
-
         // if similar sign && sign is RESET (+ve), smaller value is maximum
         if (num1._flags._sign == num2._flags._sign == eFlags.RESET) {
             return module.exports.unsignedMin(num1, num2);

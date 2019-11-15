@@ -1,6 +1,6 @@
 const number = require('../../type/');
 const { eBase } = require('../../type/base');
-const {eFlags} = require('../../type/flags');
+const { eFlags } = require('../../type/flags');
 const ops = require('../../operations');
 
 module.exports = {
@@ -8,6 +8,9 @@ module.exports = {
         // returns maximum of two numbers
         // does not considers sign of numbers
 
+        if(ops.equate(num1, num2)){
+            return num1;
+        }
         // check 1 :: compare left lengths
         if (num1._leftLength < num2._leftLength) {
             return num2;
@@ -36,7 +39,7 @@ module.exports = {
                     return num1;
                 }
             }
-        }else{
+        } else {
             return num1;
         }
     },
@@ -44,12 +47,14 @@ module.exports = {
         // returns maximum of two numbers
         // considers signs in comparison
 
+        if(ops.equate(num1, num2, true)){
+            return num1;
+        }
         // check 0 :: compare signs
-        
         // if similar sign && sign is RESET (+ve), smaller value is maximum
         if (num1._flags._sign == num2._flags._sign == eFlags.RESET) {
             return ops.unsignedMin(num1, num2);
-        } 
+        }
         // if similar sign && sign is SET (-ve), greater value is maximum
         else if (num1._flags._sign == num2._flags._sign == eFlags.SET) {
             return module.exports.unsignedMax(num1, num2);

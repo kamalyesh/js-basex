@@ -1,6 +1,7 @@
 const { eBase, converter } = require('../../type/base');
-let Number = require('../../type');
+const Number = require('../../type');
 const ops = require('../../operations');
+const {eFlags} = require('../../type/flags');
 
 module.exports = {
     unsignedSubtraction: (num1, num2) => {
@@ -81,42 +82,42 @@ module.exports = {
     },
     subtraction: (num1, num2) => {
         let arr = [num1, num2];
-        let min = ops.min(arr, false);
+        let min = ops.minimum(arr, false);
         // check for signs here
         if (num1._flags._sign == num2._flags._sign) {
             // both signs same, perform subtraction
             let subtraction = require('./subtraction');
             let sign;
-            let r;
+            let returnValue;
             if (min == 0) {
                 // num2 - num1
                 sign = num2._flags._sign;
-                r = subtraction.unsignedSubtraction(num2, num1);
+                returnValue = subtraction.unsignedSubtraction(num2, num1);
                 // let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
-                let numString = sign == eFlags.SET ? '-' + r._getValue() : r._getValue();
-                r = number.getNumber(numString, r._base);
-                return r;
+                let numString = sign == eFlags.SET ? '-' + returnValue._getValue() : returnValue._getValue();
+                returnValue = Number.getNumber(numString, returnValue._base);
+                return returnValue;
             } else if (min == 1) {
                 // num1 - num2
                 sign = num1._flags._sign;
-                r = subtraction.unsignedSubtraction(num1, num2);
+                returnValue = subtraction.unsignedSubtraction(num1, num2);
                 // let numString = sign==eFlags.SET || r._flags._zero==eFlags.SET?r._getValue():'-'+r._getValue();
-                let numString = sign == eFlags.SET ? '-' + r._getValue() : r._getValue();
-                r = number.getNumber(numString, r._base);
-                return r;
+                let numString = sign == eFlags.SET ? '-' + returnValue._getValue() : returnValue._getValue();
+                returnValue = Number.getNumber(numString, returnValue._base);
+                return returnValue;
             } else {
                 // exception
                 console.log('something went wrong');
             }
         } else {
             // num1 is -ve
-            let r = ops.unsignedAddition(num1, num2);
-            let numString = r._getValue();
+            let returnValue = ops.unsignedAddition(num1, num2);
+            let numString = returnValue._getValue();
             if (num1._flags._sign == eFlags.SET) {
                 numString = '-' + numString;
             }
-            r = number.getNumber(numString, r._base);
-            return r;
+            returnValue = number.getNumber(numString, returnValue._base);
+            return returnValue;
         }
     }
 }
