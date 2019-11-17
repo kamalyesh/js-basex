@@ -20,7 +20,7 @@ module.exports = {
     },
     prepareMultiplicationTable: (number) => {
         const arith = require('./multiplication');
-        return arith.prepareMultiplicationTable(num1, num2);
+        return arith.prepareMultiplicationTable(number);
     },
     multiplication: (num1, num2) => {
         const arith = require('./multiplication');

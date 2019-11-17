@@ -5,9 +5,9 @@ const { eFlags } = require('../../type/flags');
 
 module.exports = {
     prepareMultiplicationTable: (number) => {
-        if(number._flags._sign==eFlags.SET){
+        if (number._flags._sign == eFlags.SET) {
             let n = number._value;
-            n= n.substr(1);
+            n = n.substr(1);
             number = Number.getNumber(n, number._base);
         }
         let Ten = number._base.value;
@@ -22,33 +22,33 @@ module.exports = {
                 return multiplactionTable;
             }
         }
-        if(index>Ten){
+        if (index > Ten) {
             throw new Error('invalid base for preparing multiplaction table');
         }
     },
     multiplication: (num1, num2) => {
         // multiplcation of two numbers num1 and num2
         let base;
-        if(num1._base.value == num2._base.value)    base = num1._base;
+        if (num1._base.value == num2._base.value) base = num1._base;
         else throw new Error('invald operation! base mismatch!');
 
         let shiftDecimals = 0;
         let n1 = num1;
         let n2 = num2;
-        while(n1._value.includes('.') && n2._value.includes('.')){
+        while (n1._value.includes('.') && n2._value.includes('.')) {
             n1 = ops.leftShift(n1);
             n2 = ops.leftShift(n2);
-            shiftDecimals+=2;
+            shiftDecimals += 2;
         }
-        while(n1._value.includes('.')){
+        while (n1._value.includes('.')) {
             n1 = ops.leftShift(n1);
             shiftDecimals++;
         }
-        while(n2._value.includes('.')){
+        while (n2._value.includes('.')) {
             n2 = ops.leftShift(n2);
             shiftDecimals++;
         }
-        let multiplier = n2._value.startsWith('-')?n2._value.substr(1):n2._value;
+        let multiplier = n2._value.startsWith('-') ? n2._value.substr(1) : n2._value;
 
         let sign = n1._flags._sign == n2._flags._sign ? eFlags.RESET : eFlags.SET;
         let sum = Number.getZeros(base, num1._leftLength + num2._leftLength, num1._rightLength + num2._rightLength);
@@ -68,5 +68,5 @@ module.exports = {
             }
             sum = ops.leftShift(sum);
         }
-    },    
+    },
 }

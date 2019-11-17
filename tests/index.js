@@ -70,6 +70,8 @@ module.exports = {
             test.test12()
             ,
             test.test13()
+            ,
+            test.test14()
         ];
         tests.map((test, index)=>{
             console.log(`test ${index}: `,test);
@@ -100,6 +102,8 @@ module.exports = {
             tests[11].status
             &&
             tests[12].status
+            &&
+            tests[13].status
         )
     }
 }

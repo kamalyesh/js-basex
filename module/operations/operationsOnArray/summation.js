@@ -2,13 +2,6 @@ const ops = require('../../operations');
 
 module.exports = {
     sum: (numbers) => {
-        // let n = '[';
-        // for (let index = 0; index < numbers.length; index++) {
-        //     const number = numbers[index];
-        //     n+= number._getFormattedValue(0);
-        //     n+=index+1 < numbers.length?',':'';
-        // }
-        // n+=']';
         let sum;
         if (numbers.length > 1) {
             sum = numbers[0];

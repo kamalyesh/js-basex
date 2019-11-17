@@ -16,6 +16,14 @@ module.exports = {
         const arith = require('./arithmetic');
         return arith.unsignedSubtraction(num1, num2);
     },
+    prepareMultiplicationTable: (number) => {
+        const arith = require('./arithmetic');
+        return arith.prepareMultiplicationTable(number);
+    },
+    multiplication: (num1, num2) => {
+        const arith = require('./arithmetic');
+        return arith.multiplication(num1, num2);
+    },
 
     unsignedEquate: (num1, num2) => {
         const comparison = require('./comparison');
@@ -60,6 +68,10 @@ module.exports = {
     sum: (numbers) => {
         const arith = require('./operationsOnArray');
         return arith.sum(numbers);
+    },
+    multiply: (numbers) => {
+        const arith = require('./operationsOnArray');
+        return arith.multiply(numbers);
     },
     unsignedMaximum: (numbers) => {
         const comparison = require('./operationsOnArray');
@@ -112,7 +124,7 @@ module.exports = {
     //     const compare = require('./comparison');
     //     return compare.areEqual(numbers, signed);
     // },
-    
+
     shift: (number, shiftCount) => {
         const shifter = require('./shift');
         return shifter.shift(number, shiftCount);
