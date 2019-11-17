@@ -30,8 +30,13 @@ module.exports = class BXCNumber {
             let arr = [];
             if(this._leftValue){    
                 for (let index = 0; index < this._leftValue.length; index++) {
-                    const c = this._leftValue[index];
-                    if(c!='-')  arr.push(converter.getBaseFromTextChar(c));
+                    const v = this._leftValue[index];
+                    if(v!='-')  {
+                        const c = converter.getBaseFromTextChar(v);
+                        if(c.value >= this._base.value){
+                            throw new Error('invalid symbol ', c)
+                        }else arr.push(c);
+                    }
                 }
             }
             this._leftPart = arr;
@@ -41,8 +46,13 @@ module.exports = class BXCNumber {
             let arr = [];
             if(this._rightValue){
                 for (let index = 0; index < this._rightValue.length; index++) {
-                    const c = this._rightValue[index];
-                    arr.push(converter.getBaseFromTextChar(c));
+                    const v = this._rightValue[index];
+                    if(v!='-')  {
+                        const c = converter.getBaseFromTextChar(v);
+                        if(c.value >= this._base.value){
+                            throw new Error('invalid symbol ', c)
+                        }else arr.push(c);
+                    }
                 }
             }
             this._rightPart = arr;
