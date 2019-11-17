@@ -1,77 +1,34 @@
-module.exports = Base =  {
-    eBase : {
-        ZERO:{
-            text:'0',
-            value:0
-        },
-        ONE:{
-            text:'1',
-            value:1
-        },
-        TWO:{
-            text:'2',
-            value:2
-        },
-        THREE:{
-            text:'3',
-            value:3
-        },
-        FOUR:{
-            text:'4',
-            value:4
-        },
-        FIVE:{
-            text:'5',
-            value:5
-        },
-        SIX:{
-            text:'6',
-            value:6
-        },
-        SEVEN:{
-            text:'7',
-            value:7
-        },
-        EIGHT:{
-            text:'8',
-            value:8
-        },
-        NINE:{
-            text:'9',
-            value:9
-        },
-        A:{
-            text:'A',
-            value:10
-        },
-        B:{
-            text:'B',
-            value:11
-        },
-        C:{
-            text:'C',
-            value:12
-        },
-        D:{
-            text:'D',
-            value:13
-        },
-        E:{
-            text:'E',
-            value:14
-        },
-        F:{
-            text:'F',
-            value:15
-        },
-        G:{
-            text:'G',
-            value:16
-        },
+
+class BXCBase {
+    constructor(text, value) {
+        this.text = text;
+        this.value = value;
+    }
+}
+
+module.exports = Base = {
+    eBase: {
+        ZERO: new BXCBase('0',0),
+        ONE: new BXCBase('1', 1),
+        TWO:  new BXCBase('2', 2),
+        THREE:  new BXCBase('3', 3),
+        FOUR:  new BXCBase('4', 4),
+        FIVE:  new BXCBase('5', 5),
+        SIX:  new BXCBase('6', 6),
+        SEVEN:  new BXCBase('7', 7),
+        EIGHT:  new BXCBase('8', 8),
+        NINE:  new BXCBase('9', 9),
+        A:  new BXCBase('A', 10),
+        B: new BXCBase('B', 11),
+        C: new BXCBase('C', 12),
+        D: new BXCBase('D', 13),
+        E: new BXCBase('E', 14),
+        F: new BXCBase('F', 15),
+        G: new BXCBase('G', 16),
     },
-    converter:{
-        getBaseFromValue:(value)=>{
-            switch(value){
+    converter: {
+        getBaseFromValue: (value) => {
+            switch (value) {
                 case 0: return Base.eBase.ZERO;
                 case 1: return Base.eBase.ONE;
                 case 2: return Base.eBase.TWO;
@@ -95,8 +52,8 @@ module.exports = Base =  {
                 case 16: return Base.eBase.G;
             }
         },
-        getBaseFromTextChar:(textChar)=>{
-            switch(textChar){
+        getBaseFromTextChar: (textChar) => {
+            switch (textChar) {
                 case '0': return Base.eBase.ZERO;
                 case '1': return Base.eBase.ONE;
                 case '2': return Base.eBase.TWO;

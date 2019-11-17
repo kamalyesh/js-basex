@@ -9,7 +9,7 @@ module.exports = {
         let n1 = Number.getNumber('13.1234567890');
         let n2 = Number.getNumber('92.2345678901');
         let sum = ops.sum([n1, n2]);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test03: () => {
         console.log('TEST', ' simple unsigned addition (one number)');
@@ -17,14 +17,14 @@ module.exports = {
         const ops = require('../../module/operations');
         let n1 = Number.getNumber('13.1234567890');
         let sum = ops.sum([n1]);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test04: () => {
         console.log('TEST', ' simple unsigned addition (no numbers)');
         let Number = require('../../module/type/index');
         const ops = require('../../module/operations');
         let sum = ops.sum([]);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test05: () => {
         console.log('TEST', ' minimum of two numbers ');
@@ -46,7 +46,7 @@ module.exports = {
         let n1 = Number.getNumber('10.1234567890');
         let n2 = Number.getNumber('20.2345678901');
         let sum = ops.subtraction(n2, n1);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test07: () => {
         console.log('TEST', ' zero - number');
@@ -57,7 +57,7 @@ module.exports = {
         console.log('zero: ', n1);
         let n2 = Number.getNumber('92.2345678901');
         let sum = ops.subtraction(n1, n2);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test08: () => {
         console.log('TEST', 'result zero ');
@@ -67,7 +67,7 @@ module.exports = {
         let n1 = Number.getNumber('10.1');
         let n2 = Number.getNumber('10.1');
         let sum = ops.subtraction(n1, n2);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test09: () => {
         console.log('TEST', ' maximum of two numbers ');
@@ -105,7 +105,7 @@ module.exports = {
         let n2 = Number.getNumber('-10.1234567890');
         let n1 = Number.getNumber('-20.2345678901');
         let sum = ops.subtraction(n1, n2);
-        return { status: true, sum };
+        return { status: true, result:{sum} };
     },
     test12: () => {
         console.log('TEST', ' multiplication table of 1 to 10, in base 10');
@@ -113,16 +113,22 @@ module.exports = {
         const ops = require('../../module/operations/arithmetic/multiplication');
         const { eBase } = require('../../module/type/base');
         let Ten = eBase.A;
+        let tables = [];
         for (let num = 1; num < Ten.value; ++num) {
             let table = Number.getNumber(num + '', Ten);
             table = ops.prepareMultiplicationTable(table);
             for (let index2 = 0; index2 < table.length; index2++) {
                 const element = table[index2];
-                console.log(element._value);
+                // console.log(element._value);
+                if(index2==table.length-1){
+                    tables.push(table);
+                }
             }
-            console.log('..');
+            // console.log('..');
+            if(num == Ten.value-1){
+                return { status: true , result:tables};
+            }
         }
-        return { status: true };
     },
     test13: () => {
         console.log('TEST', ' multiplication of two numbers, in base 10');
@@ -136,8 +142,8 @@ module.exports = {
 
         let result = ops.multiplication(n2, n1);
         result._trimZero();
-        console.log(`multiplication ${n1._value}*${n2._value} = ${result._value}`);
+        // console.log(`multiplication ${n1._value}*${n2._value} = ${result._value}`);
         
-        return { status: true };
+        return { status: true , result: result};
     },
 }

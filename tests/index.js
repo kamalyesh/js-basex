@@ -3,53 +3,103 @@ module.exports = {
     numbers: () => {
         let test = require('./numbers');
         console.log('testing numbers');
+        let tests = [
+            test.test01()
+            ,
+            test.test02()
+            ,
+            test.test03()
+            ,
+            test.test04()
+            ,
+            test.test05()
+            ,
+            test.test06()
+            ,
+            test.test07()
+            ,
+            test.test08()
+        ];
+        tests.map((test, index)=>{
+            console.log(`test ${index}: `,test);
+        });
         return (
-            test.test01().status
+            tests[0].status
             &&
-            test.test02().status
+            tests[1].status
             &&
-            test.test03().status
+            tests[2].status
             &&
-            test.test04().status
+            tests[3].status
             &&
-            test.test05().status
+            tests[4].status
             &&
-            test.test06().status
+            tests[5].status
             &&
-            test.test07().status
+            tests[6].status
             &&
-            test.test08().status
+            tests[7].status
         )
     },
     operations: () => {
         let test = require('./ops');
         console.log('testing operations');
-        return (
+        let tests = [
             test.test01()
-            &&
+            ,
             test.test02()
-            &&
+            ,
             test.test03()
-            &&
+            ,
             test.test04()
-            &&
+            ,
             test.test05()
-            &&
+            ,
             test.test06()
-            &&
+            ,
             test.test07()
-            &&
+            ,
             test.test08()
-            &&
+            ,
             test.test09()
-            &&
+            ,
             test.test10()
-            &&
+            ,
             test.test11()
-            &&
+            ,
             test.test12()
-            &&
+            ,
             test.test13()
+        ];
+        tests.map((test, index)=>{
+            console.log(`test ${index}: `,test);
+        });
+        return (
+            tests[0].status
+            &&
+            tests[1].status
+            &&
+            tests[2].status
+            &&
+            tests[3].status
+            &&
+            tests[4].status
+            &&
+            tests[5].status
+            &&
+            tests[6].status
+            &&
+            tests[7].status
+            &&
+            tests[8].status
+            &&
+            tests[9].status
+            &&
+            tests[10].status
+            &&
+            tests[11].status
+            &&
+            tests[12].status
         )
     }
 }
