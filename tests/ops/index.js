@@ -137,8 +137,8 @@ module.exports = {
         const { eBase } = require('../../module/type/base');
         let Ten = eBase.FIVE;
 
-        let n2 = Number.getNumber('0.11');
-        let n1 = Number.getNumber('0.11');
+        let n2 = Number.getNumber('110');
+        let n1 = Number.getNumber('11');
 
         let result = ops.multiplication(n2, n1);
         result._trimZero();

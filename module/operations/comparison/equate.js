@@ -8,7 +8,7 @@ module.exports = {
 
         // check for signs of both
         if ((num1.startsWith('-') && !num2.startsWith('-')) || (!num1.startsWith('-') && num2.startsWith('-'))) {
-            if (num1.startsWith('-')) num = num.substr(1);
+            if (num1.startsWith('-')) num1 = num1.substr(1);
             if (num2.startsWith('-')) num2 = num2.substr(1);
         }
 

@@ -116,7 +116,7 @@ module.exports = {
             if (num1._flags._sign == eFlags.SET) {
                 numString = '-' + numString;
             }
-            returnValue = number.getNumber(numString, returnValue._base);
+            returnValue = Number.getNumber(numString, returnValue._base);
             return returnValue;
         }
     }
