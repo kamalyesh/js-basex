@@ -24,6 +24,14 @@ module.exports = {
         const arith = require('./arithmetic');
         return arith.multiplication(num1, num2);
     },
+    division: (num1, num2) => {
+        const arith = require('./arithmetic');
+        return arith.division(num1, num2);
+    },
+    remainder: (num1, num2) => {
+        const arith = require('./arithmetic');
+        return arith.remainder(num1, num2);
+    },
 
     unsignedEquate: (num1, num2) => {
         const comparison = require('./comparison');

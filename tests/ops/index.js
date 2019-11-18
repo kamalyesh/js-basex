@@ -170,4 +170,20 @@ module.exports = {
 
         return { status: true, result: result, formattedValue:result._getFormattedValue() };
     },
+    test15: () => {
+        console.log('TEST', 'division and remainder of two numbers, in base 10');
+        let Number = require('../../module/type/index');
+        const ops = require('../../module/operations/');
+        const { eBase } = require('../../module/type/base');
+
+        let n2 = Number.getNumber('110');
+        let n1 = Number.getNumber('11');
+
+        let division = ops.division(n2, n1);
+        division._trimZero();
+        let remainder = ops.remainder(n2, n1);
+        remainder._trimZero();
+
+        return { status: true, result: {division, remainder} };
+    },
 }

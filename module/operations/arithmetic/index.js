@@ -25,5 +25,13 @@ module.exports = {
     multiplication: (num1, num2) => {
         const arith = require('./multiplication');
         return arith.multiplication(num1, num2);
+    },
+    division: (num1, num2) => {
+        const arith = require('./division');
+        return arith.division(num1, num2);
+    },
+    remainder: (num1, num2) => {
+        const arith = require('./division');
+        return arith.remainder(num1, num2);
     }
 }
