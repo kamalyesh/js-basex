@@ -14,11 +14,11 @@ module.exports = {
         if (num1._flags._float) {
             // get right part of num1
             rightPart1 = num1._rightPart;
-        }
+        }else rightPart1='';
         if (num2._flags._float) {
             //  get right part of num2
             rightPart2 = num2._rightPart;
-        }
+        }else rightPart2='';
 
         let leftLength = leftPart1.length > leftPart2.length ? leftPart1.length : leftPart2.length;
         let rightLength = rightPart1.length > rightPart2.length ? rightPart1.length : rightPart2.length;

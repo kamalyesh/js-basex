@@ -15,7 +15,7 @@ module.exports = {
             value = p3 + p4;
             return module.exports.rightShift(Number.getNumber(value, number._base), shiftCount - 1);
         } else if (!shiftCount) {
-            return module.exports.leftShift(number, 1);
+            return module.exports.rightShift(number, 1);
         }
     }
 }
