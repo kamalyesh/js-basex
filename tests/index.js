@@ -72,16 +72,16 @@ module.exports = {
             // test.test13()
             // ,
             // test.test14()
-            ,
-            test.test15()
+            // ,
+            // test.test15()
         ];
         tests.map((test, index)=>{
             console.log(`test ${index}: `,test);
         });
         return (
             tests[0].status
-            &&
-            tests[1].status
+            // &&
+            // tests[1].status
             // &&
             // tests[2].status
             // &&

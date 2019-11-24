@@ -6,8 +6,6 @@ const ops = require('../../operations');
 var result = {
     division: Number.getPI(),
     remainder: Number.getPI(),
-    divisionInfoFlags: {},
-    divisionInfoBase: {},
 }
 
 
@@ -57,6 +55,8 @@ module.exports = {
                         */
 
                         let num_next = multiplicationTable[i - 1];
+                        num_next._trimZero();
+                        Bhajy._trimZero();
                         num_next = ops.subtraction(num_next, Bhajy);
                         num_next._trimZero();
 
@@ -92,20 +92,35 @@ module.exports = {
         let shiftDecimals = 0;
         let n1 = num1;
         let n2 = num2;
-        while (n1._value.includes('.') && n2._value.includes('.')) {
-            n1 = ops.leftShift(n1);
-            n2 = ops.leftShift(n2);
-            shiftDecimals += 2;
-        }
-        while (n1._value.includes('.')) {
-            n1 = ops.leftShift(n1);
+
+        while (n1._leftLength > 1) {
             shiftDecimals++;
+            n1 = ops.rightShift(n1);
         }
-        while (n2._value.includes('.')) {
-            n2 = ops.leftShift(n2);
+        while (n2._getFaceValueAt(0).value == 0) {
             shiftDecimals++;
+            n2 = ops.leftShift(n2);
         }
-        if (shiftDecimals < precision - 1) {
+        while (n1._getFaceValueAt(0).value == 0) {
+            shiftDecimals--;
+            n1 = ops.leftShift(n1);
+        }
+        while (n2._leftLength > 1) {
+            shiftDecimals--;
+            n2 = ops.rightShift(n2);
+        }
+        while (ops.minimum([n1, n2]) == 0) {
+            shiftDecimals--;
+            n1 = ops.leftShift(n1);
+        }
+        if (shiftDecimals > 0) {
+            let p = precision - shiftDecimals;
+            shiftDecimals += p;
+            precision += parseInt(p / 2);
+        } else if( shiftDecimals==0){
+            shiftDecimals = precision - shiftDecimals;
+            precision++;
+        }else if (shiftDecimals <= precision) {
             shiftDecimals = precision - shiftDecimals - 1;
         }
         let divider = n2._value.startsWith('-') ? n2._value.substr(1) : n2._value;
@@ -114,45 +129,35 @@ module.exports = {
         let multiplicationTable = ops.prepareMultiplicationTable(divider);
         let bhagakar = '';
 
-        while (count <= precision) {
-            let division = getDivision(num1, num2);
-            Baki = ops.subtraction(num1, multiplicationTable[division]);
+        while (count < precision) {
+            let division = getDivision(n1, n2);
+            Baki = ops.subtraction(n1, multiplicationTable[division]);
             Baki._trimZero();
             try {
                 bhagakar += division;
-                console.log(bhagakar);
-                console.log(Number.getNumber(bhagakar, base));
             } catch (ex) {
                 console.log(ex);
             }
-            if (Baki._value == "0") {
-                //bhagakar+=division;
-            } else if (Baki._flags._sign == eFlags.SET) {
-                //bhagakar+=division;
-            } else {
+            if (Baki._value != "0" || Baki._flags._sign == eFlags.RESET) {
                 //bhagakar+=division;
                 Baki = ops.leftShift(Baki);
-                Baki.trimZero();
+                Baki._trimZero();
                 /*if(bhagakar.contains(".")){
                     bhagakar+="0";
                 }else{
                     bhagakar+=".";
                 }*/
             }
-            num1 = Baki;
+            n1 = Baki;
             count++;
         }
 
-        bhagakar = Number.getNumber(sign==eFlags.SET?'-'+bhagakar:bhagakar, base);
+        bhagakar = Number.getNumber(sign == eFlags.SET ? '-' + bhagakar : bhagakar, base);
         bhagakar._trimZero();
         bhagakar = ops.rightShift(bhagakar, shiftDecimals);
-        result.divisionInfoFlags = bhagakar._flags;
-        result.divisionInfoBase = bhagakar._base;
+        Baki = ops.rightShift(Baki, shiftDecimals);
         result.division = bhagakar;
+        result.remainder = Baki;
         return result;
     },
-
-    remainder: (num1, num2) => {
-        return result.remainder;
-    }
 }

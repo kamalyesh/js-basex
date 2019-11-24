@@ -176,18 +176,13 @@ module.exports = {
         const ops = require('../../module/operations/');
         const { eBase } = require('../../module/type/base');
 
-        let n2 = Number.getNumber('-110');
-        let n1 = Number.getNumber('-11');
+        let n2 = Number.getNumber('22');
+        let n1 = Number.getNumber('7');
 
         let division = ops.division(n2, n1);
         division.division._trimZero();
-        let remainder = ops.remainder(n2, n1);
-        remainder._trimZero();
+        division.remainder._trimZero();
 
-        return { status: true, result: {
-            division:division.division, remainder,
-            divisionInfoBase:division.divisionInfoBase,
-            divisionInfoFlags:division.divisionInfoFlags
-        } };
+        return { status: true, result: division };
     },
 }

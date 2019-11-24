@@ -13,6 +13,7 @@ module.exports = {
         let Ten = number._base.value;
         const multiplactionTable = [];
         multiplactionTable[0] = Number.getNumber(0, number._base);
+        multiplactionTable[0]._trimZero();
         for (let index = 1; index < Ten; index++) {
             let n = ops.addition(multiplactionTable[index - 1], number)._value;
             multiplactionTable[index] = Number.getNumber(n, number._base);

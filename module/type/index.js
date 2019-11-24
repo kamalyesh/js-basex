@@ -23,13 +23,15 @@ module.exports = {
         } else {
             v = '0'
         }
-        if (right) {
-            if (right > 0) {
-                v += '.';
-            }
-            while (right > 0) {
-                v += eBase.ZERO.text;
-                right--;
+        if (right >= 0) {
+            v += '.';
+            if(right==0){
+                v += '0';
+            }else{
+                while (right > 0) {
+                    v += eBase.ZERO.text;
+                    right--;
+                }
             }
         } else {
             v += '0';

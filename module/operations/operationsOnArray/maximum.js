@@ -43,6 +43,7 @@ module.exports = {
                 if (maxValue._flags._sign == number._flags._sign) {
                     // if similar sign && sign is RESET (+ve), smaller value is maximum
                     operation = OP_LESS_THAN
+                } else {
                     // if similar sign && sign is SET (-ve), greater value is maximum
                     operation = OP_GREATER_THAN
                 }
@@ -82,7 +83,7 @@ module.exports = {
 
                             // check 2.3.1.1
                             // compare right parts from left most to right most place
-                            let length = maxValue._rightLength > number._rightLength ? number._rightLength : maxValue._rightLength;
+                            let length = maxValue._rightLength < number._rightLength ? number._rightLength : maxValue._rightLength;
                             for (let index2 = 0; index2 < length; index2++) {
                                 const e1 = maxValue._getFaceValueAt(-index2 - 1) ? maxValue._getFaceValueAt(-index2 - 1) : eBase.ZERO;
                                 const e2 = number._getFaceValueAt(-index2 - 1) ? number._getFaceValueAt(-index2 - 1) : eBase.ZERO;

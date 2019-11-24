@@ -1,6 +1,7 @@
 const { eBase, converter } = require('../../type/base');
 const Number = require('../../type');
 const ops = require('../../operations');
+const {eFlags} = require('../../type/flags');
 
 module.exports = {
     unsignedAddition: (num1, num2) => {
@@ -74,6 +75,11 @@ module.exports = {
         return zero;
     },
     addition: (num1, num2) => {
+        if(num2._flags._zero == eFlags.SET){
+            return num1;
+        }else if(num1._flags._zero == eFlags.SET){
+            return num2;
+        }
         // check for signs here
         if (num1._flags._sign == num2._flags._sign) {
             // both signs same, perform addition

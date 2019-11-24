@@ -26,10 +26,12 @@ module.exports = {
     },
     division: (num1, num2) => {
         const arith = require('./arithmetic');
+        // returns object {division, remainder}
         return arith.division(num1, num2);
     },
     remainder: (num1, num2) => {
         const arith = require('./arithmetic');
+        // returns object {division, remainder}
         return arith.remainder(num1, num2);
     },
 

@@ -42,6 +42,7 @@ module.exports = {
                 if (minValue._flags._sign == number._flags._sign) {
                     // if similar sign && sign is RESET (+ve), smaller value is minimum
                     operation = OP_LESS_THAN
+                }else{
                     // if similar sign && sign is SET (-ve), greater value is minimum
                     operation = OP_GREATER_THAN
                 }
@@ -81,7 +82,7 @@ module.exports = {
 
                             // check 2.3.1.1
                             // compare right parts from left most to right most place
-                            let length = minValue._rightLength > number._rightLength ? number._rightLength : minValue._rightLength;
+                            let length = minValue._rightLength < number._rightLength ? number._rightLength : minValue._rightLength;
                             for (let index2 = 0; index2 < length; index2++) {
                                 const e1 = minValue._getFaceValueAt(-index2 - 1) ? minValue._getFaceValueAt(-index2 - 1) : eBase.ZERO;
                                 const e2 = number._getFaceValueAt(-index2 - 1) ? number._getFaceValueAt(-index2 - 1) : eBase.ZERO;
