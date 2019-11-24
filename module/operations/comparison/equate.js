@@ -3,8 +3,14 @@ module.exports = {
         // returns true if two numbers are equal
         // does not considers sign of numbers
 
-        if (typeof num1 != 'string') { num1 = num1._value };
-        if (typeof num2 != 'string') { num2 = num2._value };
+        if(typeof num1 != 'string'){
+            num1._trimZero();
+            num1 = num1._value ;
+        }
+        if(typeof num2 != 'string'){
+            num2._trimZero();
+            num2 = num2._value ;
+        }
 
         // check for signs of both
         if ((num1.startsWith('-') && !num2.startsWith('-')) || (!num1.startsWith('-') && num2.startsWith('-'))) {
