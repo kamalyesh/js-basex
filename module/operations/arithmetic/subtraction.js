@@ -29,9 +29,11 @@ module.exports = {
         for (let index = rightLength - 1; index >= 0; index--) {
             // sum of right side. do this first and get a borrow
 
+            let i = num1._rightLength - index;
+            let j = num2._rightLength - index;
             // get values for single digit subtraction
-            let a = rightPart1[index] ? rightPart1[index] : eBase.ZERO;
-            let b = rightPart2[index] ? rightPart2[index] : eBase.ZERO;
+            let a = rightPart1[i] ? rightPart1[i] : eBase.ZERO;
+            let b = rightPart2[j] ? rightPart2[j] : eBase.ZERO;
             // make subtraction
             let s = b.value + borrow.value;
             if (s > a.value) {

@@ -7,7 +7,7 @@ module.exports = {
         } else if (shiftCount > 0) {
             return module.exports.leftShift(number, shiftCount);
         } else if (shiftCount < 0) {
-            return module.exports.rightShift(number, shiftCount);
+            return module.exports.rightShift(number, -shiftCount);
         }
     },
     leftShift: (number, shiftCount) => {

@@ -12,7 +12,7 @@ module.exports = {
             return num1;
         }
         // check 1 :: compare left lengths
-        if (num1._leftLength < num2._leftLength) {
+        else if (num1._leftLength < num2._leftLength) {
             return num2;
         }
         // check 2 :: left lengths are equal
@@ -29,6 +29,8 @@ module.exports = {
                 }
             }
             // check 2.2 :: compare right parts from left most to right most place
+            if(num1._rightLength == 0) return num2;
+            if(num2._rightLength == 0) return num1;
             length = num1._rightLength > num2._rightLength ? num2._rightLength : num1._rightLength;
             for (let index2 = 0; index2 < length; index2++) {
                 const e1 = num1._getFaceValueAt(-index2 - 1) ? num1._getFaceValueAt(-index2 - 1) : eBase.ZERO;

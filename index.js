@@ -24,8 +24,9 @@ testOps = () => {
 }
 
 todo = () => {
-    console.log('CHANGE THE FILES TO SUITE NEW FORMAT');
-    console.log('THIS NEW FORMAT WILL MAKE VERSION 1.0.1');
+    console.log('                    js-basex');
+    console.log('                 VERSION 1.0.1');
+    console.log();
 }
 
 todo();

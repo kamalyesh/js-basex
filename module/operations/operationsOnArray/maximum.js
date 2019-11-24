@@ -13,8 +13,8 @@ module.exports = {
 
             for (let index = 1; index < numbers.length; index++) {
                 const number = numbers[index];
-                let max = ops.signedMax(maxValue, number)
-                if (ops.signedEquate(max, number)) {
+                let max = ops.unsignedMax(maxValue, number)
+                if (ops.unsignedEquate(max, number)) {
                     maxIndex = index;
                     maxValue = numbers[maxIndex];
                 }

@@ -12,8 +12,8 @@ module.exports = {
 
             for (let index = 1; index < numbers.length; index++) {
                 const number = numbers[index];
-                let min = ops.signedMin(minValue, number)
-                if (ops.signedEquate(min, number)) {
+                let min = ops.unsignedMin(minValue, number)
+                if (ops.unsignedEquate(min, number)) {
                     minIndex = index;
                     minValue = numbers[minIndex];
                 }
