@@ -90,46 +90,42 @@ module.exports = {
         }
 
         let shiftDecimals = 0;
+        let shiftE1 = 0;
+        let shiftE2 = 0;
         let n1 = num1;
         let n2 = num2;
 
-        while (n1._leftLength > 1) {
-            shiftDecimals++;
-            n1 = ops.rightShift(n1);
+        while (n1._rightLength > 1) {
+            shiftE1++;
+            n1 = ops.leftShift(n1);
         }
-        while (n2._getFaceValueAt(0).value == 0) {
-            shiftDecimals++;
+        while (n1._getFaceValueAt(-1).value != 0) {
+            shiftE1--;
+            n1 = ops.leftShift(n1);
+        }
+        while (n2._rightLength > 1) {
+            shiftE2--;
             n2 = ops.leftShift(n2);
         }
-        while (n1._getFaceValueAt(0).value == 0) {
-            shiftDecimals--;
-            n1 = ops.leftShift(n1);
+        while (n2._getFaceValueAt(-1).value != 0) {
+            shiftE2++;
+            n2 = ops.leftShift(n2);
         }
-        while (n2._leftLength > 1) {
-            shiftDecimals--;
-            n2 = ops.rightShift(n2);
+        let shiftE = 0;
+        shiftE = shiftE1 - shiftE2;
+        if (shiftE >= 0 && shiftE < precision) {
+            shiftE = precision;
+        } else if (shiftE < 0 && precision + shiftE >= 0 && precision + shiftE < precision) {
+            precision = precision + shiftE;
         }
-        while (ops.minimum([n1, n2]) == 0) {
-            shiftDecimals--;
-            n1 = ops.leftShift(n1);
-        }
-        if (shiftDecimals > 0) {
-            let p = precision - shiftDecimals;
-            shiftDecimals += p;
-            precision += parseInt(p / 2);
-        } else if( shiftDecimals==0){
-            shiftDecimals = precision - shiftDecimals;
-            precision++;
-        }else if (shiftDecimals <= precision) {
-            shiftDecimals = precision - shiftDecimals - 1;
-        }
+        shiftDecimals = shiftE;
         let divider = n2._value.startsWith('-') ? n2._value.substr(1) : n2._value;
         divider = Number.getNumber(divider, base);
         let i = 0;
         let multiplicationTable = ops.prepareMultiplicationTable(divider);
         let bhagakar = '';
 
-        while (count < precision) {
+        while (count < precision+1) {
             let division = getDivision(n1, n2);
             Baki = ops.subtraction(n1, multiplicationTable[division]);
             Baki._trimZero();
