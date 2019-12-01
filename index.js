@@ -1,9 +1,12 @@
-let test = require('./tests');
-
+const tests = require('./tests');
+const { eFlags } = require('./module/type/flags');
+const { eBase, converter } = require('./module/type/base');
+const { getNumber, getZeros, getPI, getNumberWithoutDotOrDash } = require('./module/type/');
+const ops = require('./module/operations');
 
 testNums = () => {
     // TODO: see if JOI can be used for validations here too
-    if (test.numbers()) {
+    if (tests.numbers()) {
         console.log('test of numbers is successful');
         return 'test of numbers is successful';
     } else {
@@ -14,7 +17,7 @@ testNums = () => {
 
 testOps = () => {
 
-    if (test.operations()) {
+    if (tests.operations()) {
         console.log('test of operations is successful');
         return 'test of operations is successful';
     } else {
@@ -29,6 +32,14 @@ todo = () => {
     console.log();
 }
 
-todo();
-testNums();
-testOps();
+
+module.exports = {
+    todo: todo(),
+    testNums: testNums(),
+    testOps: testOps(),
+    tests,
+    eFlags,
+    eBase, converter,
+    getNumber, getZeros, getPI, getNumberWithoutDotOrDash,
+    ops
+}
