@@ -75,6 +75,10 @@ module.exports = class BXCNumber {
         return this._flags;
     }
 
+    _getBase() {
+        return this._base;
+    }
+
     _getFaceValueAt(position) {
         if (position >= 0) {
             // look in left part
@@ -220,14 +224,14 @@ module.exports = class BXCNumber {
         if (this._flags._float == eFlags.SET && length > 0) {
             // yes, there is a rightpart
             // trim rightpart
-            if(length ==1 && this._getFaceValueAt(index).value == 0){
+            if (length == 1 && this._getFaceValueAt(index).value == 0) {
                 this._flags._float = eFlags.RESET;
             }
             while (this._getFaceValueAt(index).value == 0 && index < -1) {
                 index++;
             }
             this._rightPart = this._rightPart.splice(0, -index);
-        }else{
+        } else {
             this._flags._float = eFlags.RESET;
             this._rightPart = [eBase.ZERO];
         }
