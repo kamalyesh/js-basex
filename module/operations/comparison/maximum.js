@@ -7,8 +7,11 @@ module.exports = {
     unsignedMax: (num1, num2) => {
         // returns maximum of two numbers
         // does not considers sign of numbers
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
 
-        if(ops.equate(num1, num2)){
+        if (ops.equate(num1, num2)) {
             return num1;
         }
         // check 1 :: compare left lengths
@@ -29,8 +32,8 @@ module.exports = {
                 }
             }
             // check 2.2 :: compare right parts from left most to right most place
-            if(num1._rightLength == 0) return num2;
-            if(num2._rightLength == 0) return num1;
+            if (num1._rightLength == 0) return num2;
+            if (num2._rightLength == 0) return num1;
             length = num1._rightLength > num2._rightLength ? num2._rightLength : num1._rightLength;
             for (let index2 = 0; index2 < length; index2++) {
                 const e1 = num1._getFaceValueAt(-index2 - 1) ? num1._getFaceValueAt(-index2 - 1) : eBase.ZERO;
@@ -49,7 +52,11 @@ module.exports = {
         // returns maximum of two numbers
         // considers signs in comparison
 
-        if(ops.equate(num1, num2, true)){
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
+        if (ops.equate(num1, num2, true)) {
             return num1;
         }
         // check 0 :: compare signs

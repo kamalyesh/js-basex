@@ -5,6 +5,11 @@ const { eFlags } = require('../../type/flags');
 
 module.exports = {
     unsignedSubtraction: (num1, num2) => {
+
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
         // assume num1 is greater than num2
         let result = Number.getNumber();
         let leftPart1 = num1._leftPart;
@@ -24,7 +29,6 @@ module.exports = {
         let rightLength = rightPart1.length > rightPart2.length ? rightPart1.length : rightPart2.length;
         // create a zero
         let zero = Number.getZeros(num1._base, leftLength + 1, rightLength);
-        let base = num1._base;
         let borrow = eBase.ZERO;
         for (let index = rightLength; index >= 0; index--) {
             // sum of right side. do this first and get a borrow
@@ -84,6 +88,11 @@ module.exports = {
         return zero;
     },
     subtraction: (num1, num2) => {
+
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
         if (num2._flags._zero == eFlags.SET) {
             return num1;
         } else if (num1._flags._zero == eFlags.SET) {

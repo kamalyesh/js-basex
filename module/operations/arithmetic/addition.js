@@ -1,10 +1,15 @@
 const { eBase, converter } = require('../../type/base');
 const Number = require('../../type');
 const ops = require('../../operations');
-const {eFlags} = require('../../type/flags');
+const { eFlags } = require('../../type/flags');
 
 module.exports = {
     unsignedAddition: (num1, num2) => {
+
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
         let leftPart1 = num1._leftPart;
         let leftPart2 = num2._leftPart;
         let rightPart1;
@@ -22,7 +27,6 @@ module.exports = {
         let rightLength = rightPart1.length > rightPart2.length ? rightPart1.length : rightPart2.length;
         // create a zero
         let zero = Number.getZeros(num1._base, leftLength + 1, rightLength);
-        let base = num1._base;
         let carry = eBase.ZERO;
         for (let index = rightLength - 1; index >= 0; index--) {
             // sum of right side. do this first and get a carry
@@ -75,9 +79,9 @@ module.exports = {
         return zero;
     },
     addition: (num1, num2) => {
-        if(num2._flags._zero == eFlags.SET){
+        if (num2._flags._zero == eFlags.SET) {
             return num1;
-        }else if(num1._flags._zero == eFlags.SET){
+        } else if (num1._flags._zero == eFlags.SET) {
             return num2;
         }
         // check for signs here

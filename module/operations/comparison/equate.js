@@ -3,13 +3,17 @@ module.exports = {
         // returns true if two numbers are equal
         // does not considers sign of numbers
 
-        if(typeof num1 != 'string'){
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
+        if (typeof num1 != 'string') {
             num1._trimZero();
-            num1 = num1._value ;
+            num1 = num1._value;
         }
-        if(typeof num2 != 'string'){
+        if (typeof num2 != 'string') {
             num2._trimZero();
-            num2 = num2._value ;
+            num2 = num2._value;
         }
 
         // check for signs of both
@@ -28,13 +32,17 @@ module.exports = {
         // returns true if numbers are equal
         // considers signs in comparison
 
-        if(typeof num1 != 'string'){
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
+        if (typeof num1 != 'string') {
             num1._trimZero();
-            num1 = num1._value ;
+            num1 = num1._value;
         }
-        if(typeof num2 != 'string'){
+        if (typeof num2 != 'string') {
             num2._trimZero();
-            num2 = num2._value ;
+            num2 = num2._value;
         }
 
         // test equivalence

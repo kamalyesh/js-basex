@@ -1,13 +1,18 @@
 let Number = require('../../type/');
 const { eBase } = require('../../type/base');
-const {eFlags} = require('../../type/flags');
+const { eFlags } = require('../../type/flags');
 const ops = require('../../operations');
 
 module.exports = {
     unsignedMin: (num1, num2) => {
         // returns minimum of two numbers
         // does not considers sign of numbers
-        if(ops.equate(num1, num2)){
+
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
+        if (ops.equate(num1, num2)) {
             return num1;
         }
         // check 1 :: compare left lengths
@@ -28,8 +33,8 @@ module.exports = {
                 }
             }
             // check 2.2 :: compare right parts from left most to right most place
-            if(num1._rightLength == 0) return num1;
-            if(num2._rightLength == 0) return num2;
+            if (num1._rightLength == 0) return num1;
+            if (num2._rightLength == 0) return num2;
             length = num1._rightLength > num2._rightLength ? num2._rightLength : num1._rightLength;
             for (let index2 = 0; index2 < length; index2++) {
                 const e1 = num1._getFaceValueAt(-index2 - 1) ? num1._getFaceValueAt(-index2 - 1) : eBase.ZERO;
@@ -40,15 +45,19 @@ module.exports = {
                     return num1;
                 }
             }
-        }else{
+        } else {
             return num1;
         }
     },
     signedMin: (num1, num2) => {
         // returns maximum of two numbers
         // considers signs in comparison
-        
-        if(ops.equate(num1, num2)){
+
+        let base;
+        if (num1._base.value == num2._base.value) base = num1._base;
+        else throw new Error('invald operation! base mismatch!');
+
+        if (ops.equate(num1, num2)) {
             return num1;
         }
         // check 0 :: compare signs

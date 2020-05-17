@@ -125,7 +125,7 @@ module.exports = {
         let multiplicationTable = ops.prepareMultiplicationTable(divider);
         let bhagakar = '';
 
-        while (count < precision+1) {
+        while (count < precision + 1) {
             let division = getDivision(n1, n2);
             Baki = ops.subtraction(n1, multiplicationTable[division]);
             Baki._trimZero();
