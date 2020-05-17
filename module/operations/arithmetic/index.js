@@ -26,10 +26,19 @@ module.exports = {
         const arith = require('./multiplication');
         return arith.multiplication(num1, num2);
     },
+    unsignedMultiplication: (num1, num2) => {
+        const arith = require('./multiplication');
+        return arith.unsignedMultiplication(num1, num2);
+    },
     division: (num1, num2) => {
         const arith = require('./division');
         // returns object {division, remainder}
         return arith.division(num1, num2);
+    },
+    unsignedDivision: (num1, num2) => {
+        const arith = require('./division');
+        // returns object {division, remainder}
+        return arith.unsignedDivision(num1, num2);
     },
     remainder: (num1, num2) => {
         const arith = require('./division');

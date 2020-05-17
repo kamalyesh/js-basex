@@ -156,4 +156,11 @@ module.exports = {
         result.remainder = Baki;
         return result;
     },
+    unsignedDivision: (num1, num2) => {
+        let result = module.exports.division(num1, num2);
+        let resultStr = result._getValue();
+        resultStr = resultStr.startsWith("-") ? resultStr.substr(1) : resultStr;
+        result = Number.getNumber(resultStr, result._base, eFlags.RESET)
+        return result;
+    }
 }
