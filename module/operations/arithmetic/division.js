@@ -20,7 +20,6 @@ module.exports = {
         if (num1._flags._sign == num2._flags._sign) sign = eFlags.RESET;
         else sign = eFlags.SET;
 
-        let num_now = {};
         num1 = Number.getNumber(
             num1._flags._sign == eFlags.SET ?
                 num1._value.substr(1) :
@@ -34,7 +33,6 @@ module.exports = {
         let Baki = Number.getNumber("0", base);
         let count = 0;
         let getDivision = (Bhajy, Bhajak) => {
-            let multiplicationTable = ops.prepareMultiplicationTable(Bhajak);
             let multiplier = 0;
             for (let i = Bhajak._base.value - 1; i > 0; --i) {
                 let num_now = multiplicationTable[i];
