@@ -21,7 +21,7 @@ module.exports = {
             test.test08()
         ];
         tests.map((test, index)=>{
-            console.log(`test ${index}: `,test);
+            console.log(`test ${index}: `, JSON.stringify(test, null, 2));
         });
         return (
             tests[0].status
@@ -76,7 +76,7 @@ module.exports = {
             test.test15()
         ];
         tests.map((test, index)=>{
-            console.log(`test ${index}: `,test);
+            console.log(`test ${index}: `, JSON.stringify(test, null, 2));
         });
         return (
             tests[0].status
@@ -109,5 +109,5 @@ module.exports = {
             &&
             tests[14].status
         )
-    }
+    },
 }
