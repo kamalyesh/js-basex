@@ -1,3 +1,8 @@
+# Version 1.0.2
+- version updated
+- converter getBaseFromTextChar method corrected
+- Create CHANGELOG.md
+
 # Version 1.0.1
 - test command added to package.json
 - modified tests.
